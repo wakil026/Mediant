@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mediant</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="are_you_not_registered_sign_up">Are you not registered? Sign up?</string>
+    <string name="username">Username</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="are_you_already_registered_sign_in">Are you already registered? Sign in?</string>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical"
+    tools:context=".AddMedicineActivity">
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:hint="Brand Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/BrandNameEditTextId"
+        android:inputType=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:hint="Generic Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/GenericEditTextId"
+        android:inputType=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:hint="Description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/DescriptionEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/SaveButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Save" />
+
+</LinearLayout>

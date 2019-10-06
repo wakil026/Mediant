@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "992011650263",
+    "firebase_url": "https://mediant-2c5a0.firebaseio.com",
+    "project_id": "mediant-2c5a0",
+    "storage_bucket": "mediant-2c5a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992011650263:android:9320fee27006a5ec9d9c92",
+        "android_client_info": {
+          "package_name": "com.example.mediant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992011650263-ud5pacq1ll4qb41h1embc3tovn6ldlsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mediant",
+            "certificate_hash": "bc35b978b31f6a17f8ec7170097380e8b3f8698a"
+          }
+        },
+        {
+          "client_id": "992011650263-pknrtjqqhreo5u45bei26k9hs3p16c1o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwTQOmFqJgKmh_WVyi9SVwvgRdRPrQ_NA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992011650263-pknrtjqqhreo5u45bei26k9hs3p16c1o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
