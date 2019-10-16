@@ -121,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
                 if (task.isSuccessful()) {
                     saveUserData(name,email);
                     finish();
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
