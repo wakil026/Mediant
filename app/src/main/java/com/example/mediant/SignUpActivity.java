@@ -30,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
-    private EditText signUpName, signUpEmail,signUpPassword;
+    private EditText signUpName, signUpEmail,signUpPassword,signUpReEnterEmail,signUpReEnterPassword;
     private ProgressBar signUpProgressBar;
     private Button signUpButton;
     private TextView signInTextView;
@@ -54,6 +54,9 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
         signUpEmail = findViewById(R.id.signUpEmailId);
         signUpPassword = findViewById(R.id.signUpPasswordId);
         signUpProgressBar = findViewById(R.id.signUpProgressBarId);
+        signUpReEnterEmail = findViewById(R.id.signUpReEnterEmailId);
+        signUpReEnterPassword = findViewById(R.id.signUpReEnterPasswordId);
+
 
         signInTextView.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
@@ -81,7 +84,9 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     private void userRegister() {
         final String name = signUpName.getText().toString().trim();
         final String email = signUpEmail.getText().toString().trim();
-        String password = signUpPassword.getText().toString().trim();
+        final String reEmail = signUpReEnterEmail.getText().toString().trim();
+        final String rePassword = signUpReEnterPassword.getText().toString().trim();
+        final String password = signUpPassword.getText().toString().trim();
 
         if(name.isEmpty()){
             signUpName.setError("Username cannot be empty");
@@ -95,6 +100,16 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
             return;
         }
 
+        if(reEmail.isEmpty()){
+            signUpReEnterEmail.setError("Re Enter your email");
+            signUpReEnterEmail.requestFocus();
+            return;
+        }
+        if(!email.equals(reEmail)){
+            signUpReEnterEmail.setError("Your Emails are not same");
+            signUpReEnterEmail.requestFocus();
+            return;
+        }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             signUpEmail.setError("Enter a valid email address");
             signUpEmail.requestFocus();
@@ -110,6 +125,12 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
         if(password.length()<6){
             signUpPassword.setError("Minimum length of a password should be at least 6");
             signUpPassword.requestFocus();
+            return;
+        }
+
+        if(!password.equals(rePassword)){
+            signUpReEnterPassword.setError("Password didn't match");
+            signUpReEnterPassword.requestFocus();
             return;
         }
 

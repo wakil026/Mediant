@@ -8,7 +8,6 @@
     tools:context=".SignUpActivity">
 
 
-
     <EditText
         android:layout_marginTop="20dp"
         android:id="@+id/signUpNameId"
@@ -30,13 +29,29 @@
 
     <EditText
         android:layout_marginTop="20dp"
+        android:id="@+id/signUpReEnterEmailId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Re-enter email address" />
+
+    <EditText
+        android:layout_marginTop="20dp"
         android:id="@+id/signUpPasswordId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/password" />
-
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/signUpReEnterPasswordId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Re-enter your password" />
     <Button
         android:layout_marginTop="20dp"
         android:id="@+id/signUpButtonId"
@@ -52,9 +67,10 @@
         android:text="@string/are_you_already_registered_sign_in" />
 
     <ProgressBar
-        android:layout_marginTop="60dp"
         android:id="@+id/signUpProgressBarId"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
+
 </LinearLayout>
