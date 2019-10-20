@@ -7,4 +7,9 @@
     <string name="username">Username</string>
     <string name="sign_up">Sign Up</string>
     <string name="are_you_already_registered_sign_in">Are you already registered? Sign in?</string>
+    <string-array name="Searching_Ambulance">
+        <item>City</item>
+        <item>Name</item>
+        <item>Contact Number</item>
+    </string-array>
 </resources>
