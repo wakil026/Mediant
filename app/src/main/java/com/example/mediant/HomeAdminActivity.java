@@ -11,6 +11,8 @@ public class HomeAdminActivity extends AppCompatActivity {
 
     Button addMedicine, removeMedicine, addAmbulance, removeAmbulance;
 
+    private Button addAdmin;
+    private Button removeAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,9 @@ public class HomeAdminActivity extends AppCompatActivity {
         removeMedicine = (Button) findViewById(R.id.removemedicine_button);
         addAmbulance = (Button) findViewById(R.id.Addambulance_button);
         removeAmbulance = (Button) findViewById(R.id.removeambulance_button);
+
+        addAdmin = (Button)findViewById(R.id.addAdminButtonId);
+        removeAdmin = (Button)findViewById(R.id.removeAdminButtonId);
 
         addMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +61,35 @@ public class HomeAdminActivity extends AppCompatActivity {
             }
         });
 
+        addAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 addingAdmin();
+            }
+        });
+
+        removeAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removingadmin();
+            }
+        });
+
+
+
+
+    }
+
+    private void addingAdmin() {
+        Intent intent = new Intent(getApplicationContext(),AddAdminActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void removingadmin(){
+        Intent intent = new Intent(getApplicationContext(),RemoveAdminActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public void addingmedicine() {

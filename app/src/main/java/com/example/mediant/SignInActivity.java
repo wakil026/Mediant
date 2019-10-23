@@ -136,6 +136,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         });
     }
     private void checkUsertype(String email){
+        final FirebaseUser user = mAuth.getCurrentUser();
         documentReference = collectionReference.document(email);
         documentReference.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -152,12 +153,10 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
 
                             }
                             else{
-                                finish();
-                                Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
+                                checkIfVerified(user,type);
+
                             }
-                            Toast.makeText(getApplicationContext(), type, Toast.LENGTH_SHORT).show();
+
                         }
                         else{
                             Toast.makeText(getApplicationContext(), "Something Wrong happened", Toast.LENGTH_SHORT).show();
@@ -172,6 +171,20 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                 });
 
 
+
+    }
+
+    private void checkIfVerified(FirebaseUser user,String type) {
+        if(user.isEmailVerified()) {
+            finish();
+            Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), type, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Please, Verify your email", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
