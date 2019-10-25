@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class HomeAdminActivity extends AppCompatActivity {
 
-    Button addMedicine, removeMedicine, addAmbulance, removeAmbulance;
+    Button addMedicine, removeMedicine, searchMedicine, searchAmbulance, addAmbulance, removeAmbulance;
 
     private Button addAdmin;
     private Button removeAdmin;
@@ -23,6 +23,8 @@ public class HomeAdminActivity extends AppCompatActivity {
         removeMedicine = (Button) findViewById(R.id.removemedicine_button);
         addAmbulance = (Button) findViewById(R.id.Addambulance_button);
         removeAmbulance = (Button) findViewById(R.id.removeambulance_button);
+        searchAmbulance = (Button) findViewById(R.id.button_search_ambu);
+        searchMedicine = (Button) findViewById(R.id.button_search_medicine);
 
         addAdmin = (Button)findViewById(R.id.addAdminButtonId);
         removeAdmin = (Button)findViewById(R.id.removeAdminButtonId);
@@ -44,6 +46,20 @@ public class HomeAdminActivity extends AppCompatActivity {
         });
 
 
+        searchMedicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchingMedicine();
+            }
+        });
+
+
+        searchAmbulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchingAmbulance();
+            }
+        });
 
         addAmbulance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,12 +109,21 @@ public class HomeAdminActivity extends AppCompatActivity {
     }
 
     public void addingmedicine() {
-        Intent intent = new Intent(this, AddMedicineActivity.class);
-        startActivity(intent);
+
     }
 
     public void removingmedicine(){
 
+    }
+
+    public void searchingMedicine(){
+        Intent intent = new Intent(this, SearchMedicineActivity.class);
+        startActivity(intent);
+    }
+
+    public void searchingAmbulance(){
+        Intent intent = new Intent(this, SearchAmbulanceActivity.class);
+        startActivity(intent);
     }
 
     public void addingambulance(){
