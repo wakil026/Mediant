@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".AmbulanceSearchListActivity"></activity>
+=======
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".RemoveAdminActivity" />
+        <activity android:name=".AddAdminActivity" />
+>>>>>>> 24a24ae907c83f45ef9e6e579b790843191b2de5
         <activity android:name=".SearchAmbulanceActivity" />
         <activity android:name=".SearchMedicineActivity" />
         <activity android:name=".AddMedicineActivity" />

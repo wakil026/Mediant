@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -140,11 +141,30 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
             public void onComplete(@NonNull Task<AuthResult> task) {
                 signUpProgressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
-                    saveUserData(name,email);
-                    finish();
-                    Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    user.sendEmailVerification()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(SignUpActivity.this, "sent", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        Toast.makeText(SignUpActivity.this, "Error: "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                    if(user.isEmailVerified()) {
+                        saveUserData(name, email);
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Please, Verify your email", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else if(task.getException() instanceof FirebaseAuthUserCollisionException){
                     Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();

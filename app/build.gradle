@@ -25,11 +25,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
+<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.2.0'
+=======
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+>>>>>>> 24a24ae907c83f45ef9e6e579b790843191b2de5
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
-
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support:support-v4:29.0.1'
