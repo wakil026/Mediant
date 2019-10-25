@@ -39,6 +39,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private EditText signInEmail,signInPassword;
     private Button signInButton;
     private TextView signUpTextView;
+    private TextView forgotPasswordTextView;
     private ProgressBar signInProgressBar;
 
     private String KEY_NAME = "name";
@@ -76,11 +77,13 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         signInPassword = findViewById(R.id.signInPasswordId);
         signInButton = findViewById(R.id.signInButtonId);
         signUpTextView = findViewById(R.id.signUpTextViewId);
-
+        forgotPasswordTextView = findViewById(R.id.signUpForgotPasswordId);
         signInProgressBar = findViewById(R.id.signInProgressBarId);
+
+
         signUpTextView.setOnClickListener(this);
         signInButton.setOnClickListener(this);
-
+        forgotPasswordTextView.setOnClickListener(this);
         signInProgressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -93,6 +96,11 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             case  R.id.signUpTextViewId:
                 finish();
                 Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.signUpForgotPasswordId:
+                intent = new Intent(getApplicationContext(),ForgotPasswordActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
@@ -122,7 +130,8 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             return;
         }
         signInProgressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 

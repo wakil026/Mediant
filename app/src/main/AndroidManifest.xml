@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RemoveAdminActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".RemoveAdminActivity" />
         <activity android:name=".AddAdminActivity" />
-        <activity android:name=".SearchAmbulanceActivity"></activity>
+        <activity android:name=".SearchAmbulanceActivity" />
         <activity android:name=".SearchMedicineActivity" />
         <activity android:name=".AddMedicineActivity" />
         <activity android:name=".MyMedicineActivity" />
