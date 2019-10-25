@@ -26,21 +26,21 @@ public class RemoveAdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_admin);
 
-        removeAdminEmail = (EditText) findViewById(R.id.newAdminEmailId);
-        removeButton = (Button) findViewById(R.id.addButtonId);
+        removeAdminEmail = (EditText) findViewById(R.id.removeAdminEmailId);
+        removeButton = (Button) findViewById(R.id.removeButtonId);
 
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = removeAdminEmail.getText().toString().trim();
-                addAdmin(email);
+                removeAdmin(email);
             }
         });
 
 
     }
 
-    private void addAdmin(final String email) {
+    private void removeAdmin(final String email) {
         Map<String,Object> user = new HashMap<>();
         user.put("type","User");
         firebaseFirestore.collection("UserData").document(email).update(user)
