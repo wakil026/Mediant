@@ -87,7 +87,9 @@ public class HomeAdminActivity extends AppCompatActivity {
     }
 
     public void addingmedicine() {
-
+        Intent intent = new Intent(getApplicationContext(),AddMedicineActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public void removingmedicine(){

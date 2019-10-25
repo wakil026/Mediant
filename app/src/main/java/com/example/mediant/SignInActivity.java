@@ -42,9 +42,9 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private TextView forgotPasswordTextView;
     private ProgressBar signInProgressBar;
 
-    private String KEY_NAME = "name";
-    private String KEY_EMAIL = "email";
-    private String KEY_TYPE = "type";
+    private String KEY_NAME = "Name";
+    private String KEY_EMAIL = "Email";
+    private String KEY_TYPE = "Type";
 
 
     @Override
@@ -159,11 +159,9 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
-
                             }
                             else{
                                 checkIfVerified(user,type);
-
                             }
 
                         }
