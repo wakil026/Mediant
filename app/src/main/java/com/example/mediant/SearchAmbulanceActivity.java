@@ -2,6 +2,7 @@ package com.example.mediant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     SearchView ambusearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,23 +34,65 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
         String item = adapterView.getItemAtPosition(i).toString();
         if(item.equals("City")){
             ambusearch.setQueryHint("Enter city");
+            ambusearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    searchaccordingcity(s);
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    return false;
+                }
+            });
 
         }
 
         else if(item.equals("Name")){
             ambusearch.setQueryHint("Enter ambulance name");
+            ambusearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    searchaccordingname(s);
+                    return false;
+                }
 
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    return false;
+                }
+            });
         }
 
-        else if(item.equals("Contact Number")){
-            ambusearch.setQueryHint("Enter contact number");
-        }
+    }
+
+    private void searchaccordingname(String s) {
+        String inputText = s.toLowerCase().trim();
+        // Toast.makeText(getApplicationContext(),inputText,Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, AmbulanceSearchListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("value",inputText);
+        bundle.putString("type","name");
+        i.putExtras(bundle);
+        startActivity(i);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-        Toast.makeText(getApplicationContext(),"Please select an search type",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Please select an search type",Toast.LENGTH_LONG).show();
 
+    }
+
+    public void searchaccordingcity(String s){
+        String inputText = s.toLowerCase().trim();
+        // Toast.makeText(getApplicationContext(),inputText,Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, AmbulanceSearchListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("value",inputText);
+        bundle.putString("type","city");
+        i.putExtras(bundle);
+        startActivity(i);
     }
 }
