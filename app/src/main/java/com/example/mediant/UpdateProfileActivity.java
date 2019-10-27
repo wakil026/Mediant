@@ -3,6 +3,7 @@ package com.example.mediant;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private EditText bloodGroupText;
     private EditText cityText;
 
+    private TextView updateEmail;
+    private TextView updatePassword;
+
     private String email;
     private String name;
     private String age;
@@ -61,6 +65,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         cityText = findViewById(R.id.updateCityId);
         updateButton = findViewById(R.id.updateButtonId);
 
+        updateEmail = findViewById(R.id.updateEmailTextViewId);
+        updatePassword = findViewById(R.id.updatePasswordTextViewId);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -73,6 +79,24 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateProfile();
+            }
+        });
+
+        updateEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UpdateEmailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
+        updatePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UpdatePasswordActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
