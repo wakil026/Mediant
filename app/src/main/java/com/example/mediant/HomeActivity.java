@@ -69,20 +69,23 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.about_us:
+            case R.id.adminAboutUs:
                 // do your code
                 return true;
-            case R.id.shift_mode:
+            case R.id.adminProfileId:
+                intent = new Intent(this,ViewProfileActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.adminShiftMode:
                 // do your code
                 intent = new Intent(this, HomeAdminActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.sign_out:
+            case R.id.adminSignOut:
                FirebaseAuth.getInstance().signOut();
                finish();
                intent = new Intent(getApplicationContext(),SignInActivity.class);
                startActivity(intent);
-
                return true;
             default:
                 return super.onOptionsItemSelected(item);

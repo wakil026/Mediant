@@ -36,9 +36,13 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     private Button signUpButton;
     private TextView signInTextView;
 
-    private String KEY_NAME = "name";
-    private String KEY_EMAIL = "email";
-    private String KEY_TYPE = "type";
+    private String KEY_NAME = "Name";
+    private String KEY_EMAIL = "Email";
+    private String KEY_TYPE = "Type";
+    private String KEY_BLOOD_GROUP = "Blood Group:";
+    private String KEY_AGE = "Age:";
+    private String KEY_CITY = "City";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,16 +159,13 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
 
                                 }
                             });
-                    if(user.isEmailVerified()) {
-                        saveUserData(name, email);
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "Please, Verify your email", Toast.LENGTH_SHORT).show();
-                    }
+                    saveUserData(name, email);
+                    finish();
+                    Intent intent = new Intent(getApplicationContext(),SignInActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Please, Verify your email", Toast.LENGTH_SHORT).show();
+
                 }
                 else if(task.getException() instanceof FirebaseAuthUserCollisionException){
                     Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();
@@ -181,6 +182,9 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
         user.put(KEY_NAME, name);
         user.put(KEY_EMAIL,email);
         user.put(KEY_TYPE,"User");
+        user.put(KEY_AGE,"");
+        user.put(KEY_BLOOD_GROUP,"");
+        user.put(KEY_CITY,"");
         firebaseFirestore.collection("UserData").document(email).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
