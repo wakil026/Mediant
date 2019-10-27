@@ -8,20 +8,48 @@
 
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/updatedEmailId"
+        android:layout_width="320dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="185dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="489dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="229dp" />
+        android:hint="Enter new email address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/updatedReEmailId"
+        android:layout_width="318dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="404dp"
+        android:ems="10"
+        android:hint="Re-enter your new email address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/changeEmailId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="297dp" />
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="351dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="332dp"
+        android:text="Change Email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
