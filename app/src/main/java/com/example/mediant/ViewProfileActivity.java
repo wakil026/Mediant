@@ -3,7 +3,9 @@ package com.example.mediant;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView profieAgeTextView;
     private TextView profieBloodGroupTextView;
     private TextView profileCityTextView;
+    private TextView updateProfileTextView;
 
     private String email;
     private String username;
@@ -54,11 +57,22 @@ public class ViewProfileActivity extends AppCompatActivity {
         profieAgeTextView = findViewById(R.id.ageId);
         profieBloodGroupTextView = findViewById(R.id.bloodGroupId);
         profileCityTextView = findViewById(R.id.cityId);
+        updateProfileTextView = findViewById(R.id.updateProfileId);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         collectionReference = firebaseFirestore.collection("UserData");
+
+        updateProfileTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UpdateProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
         viewProfile();
     }
 

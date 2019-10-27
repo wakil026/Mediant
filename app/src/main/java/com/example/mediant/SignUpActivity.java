@@ -42,6 +42,8 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     private String KEY_BLOOD_GROUP = "Blood Group:";
     private String KEY_AGE = "Age:";
     private String KEY_CITY = "City";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
