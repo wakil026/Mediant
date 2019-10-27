@@ -75,6 +75,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         collectionReference = firebaseFirestore.collection("UserData");
         documentReference = collectionReference.document(email);
 
+        getData();
+
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +101,36 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void getData() {
+        documentReference.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            name = documentSnapshot.getString(KEY_NAME);
+                            age = documentSnapshot.getString(KEY_AGE);
+                            bloodGroup = documentSnapshot.getString(KEY_BLOOD_GROUP);
+                            city = documentSnapshot.getString(KEY_CITY);
+
+                            usernameText.setText(name);
+                            ageText.setText(age);
+                            bloodGroupText.setText(bloodGroup);
+                            cityText.setText(city);
+
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void updateProfile() {
