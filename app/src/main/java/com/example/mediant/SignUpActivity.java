@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -35,9 +36,13 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     private Button signUpButton;
     private TextView signInTextView;
 
-    private String KEY_NAME = "name";
-    private String KEY_EMAIL = "email";
-    private String KEY_TYPE = "type";
+    private String KEY_NAME = "Name";
+    private String KEY_EMAIL = "Email";
+    private String KEY_TYPE = "Type";
+    private String KEY_BLOOD_GROUP = "Blood Group:";
+    private String KEY_AGE = "Age:";
+    private String KEY_CITY = "City";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,11 +145,27 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
             public void onComplete(@NonNull Task<AuthResult> task) {
                 signUpProgressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
-                    saveUserData(name,email);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    user.sendEmailVerification()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(SignUpActivity.this, "sent", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        Toast.makeText(SignUpActivity.this, "Error: "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                    saveUserData(name, email);
                     finish();
-                    Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Please, Verify your email", Toast.LENGTH_SHORT).show();
+
                 }
                 else if(task.getException() instanceof FirebaseAuthUserCollisionException){
                     Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_SHORT).show();
@@ -161,6 +182,9 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
         user.put(KEY_NAME, name);
         user.put(KEY_EMAIL,email);
         user.put(KEY_TYPE,"User");
+        user.put(KEY_AGE,"");
+        user.put(KEY_BLOOD_GROUP,"");
+        user.put(KEY_CITY,"");
         firebaseFirestore.collection("UserData").document(email).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

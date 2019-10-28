@@ -39,11 +39,12 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private EditText signInEmail,signInPassword;
     private Button signInButton;
     private TextView signUpTextView;
+    private TextView forgotPasswordTextView;
     private ProgressBar signInProgressBar;
 
-    private String KEY_NAME = "name";
-    private String KEY_EMAIL = "email";
-    private String KEY_TYPE = "type";
+    private String KEY_NAME = "Name";
+    private String KEY_EMAIL = "Email";
+    private String KEY_TYPE = "Type";
 
 
     @Override
@@ -76,11 +77,13 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         signInPassword = findViewById(R.id.signInPasswordId);
         signInButton = findViewById(R.id.signInButtonId);
         signUpTextView = findViewById(R.id.signUpTextViewId);
-
+        forgotPasswordTextView = findViewById(R.id.signUpForgotPasswordId);
         signInProgressBar = findViewById(R.id.signInProgressBarId);
+
+
         signUpTextView.setOnClickListener(this);
         signInButton.setOnClickListener(this);
-
+        forgotPasswordTextView.setOnClickListener(this);
         signInProgressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -93,6 +96,11 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             case  R.id.signUpTextViewId:
                 finish();
                 Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.signUpForgotPasswordId:
+                intent = new Intent(getApplicationContext(),ForgotPasswordActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
@@ -122,7 +130,8 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             return;
         }
         signInProgressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -136,6 +145,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         });
     }
     private void checkUsertype(String email){
+        final FirebaseUser user = mAuth.getCurrentUser();
         documentReference = collectionReference.document(email);
         documentReference.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -149,15 +159,11 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
-
                             }
                             else{
-                                finish();
-                                Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
+                                checkIfVerified(user,type);
                             }
-                            Toast.makeText(getApplicationContext(), type, Toast.LENGTH_SHORT).show();
+
                         }
                         else{
                             Toast.makeText(getApplicationContext(), "Something Wrong happened", Toast.LENGTH_SHORT).show();
@@ -172,6 +178,20 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                 });
 
 
+
+    }
+
+    private void checkIfVerified(FirebaseUser user,String type) {
+        if(user.isEmailVerified()) {
+            finish();
+            Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), type, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Please, Verify your email", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

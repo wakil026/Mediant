@@ -72,9 +72,8 @@ public class UserHomeActivity extends AppCompatActivity {
             case R.id.about_us:
                 // do your code
                 return true;
-            case R.id.shift_mode:
-                // do your code
-                intent = new Intent(this, HomeAdminActivity.class);
+            case R.id.profileId:
+                Intent intent = new Intent(this, ViewProfileActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.sign_out:
@@ -82,7 +81,6 @@ public class UserHomeActivity extends AppCompatActivity {
                 finish();
                 intent = new Intent(getApplicationContext(),SignInActivity.class);
                 startActivity(intent);
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

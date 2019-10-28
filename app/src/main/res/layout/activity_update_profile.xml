@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UpdateProfileActivity">
+
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:paddingTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/usernameTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username" />
+
+    <EditText
+        android:layout_marginStart="20dp"
+        android:id="@+id/updateUsernameId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="20dp"
+        android:inputType="textPersonName"
+        android:hint="Enter new username" />
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:paddingTop="20dp"
+        android:id="@+id/ageTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Age" />
+
+    <EditText
+        android:layout_marginStart="20dp"
+        android:id="@+id/updateAgeId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="20dp"
+        android:inputType="text|numberDecimal"
+        android:hint="Enter your age" />
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:paddingTop="20dp"
+        android:id="@+id/bloodGroupTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Blood Group" />
+
+    <EditText
+        android:layout_marginStart="20dp"
+        android:id="@+id/updateBloodGroupId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="20dp"
+        android:hint="Enter your blood group" />
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:paddingTop="20dp"
+        android:id="@+id/cityTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="City" />
+
+    <EditText
+        android:layout_marginStart="20dp"
+        android:id="@+id/updateCityId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginEnd="20dp"
+        android:hint="Enter your city" />
+
+
+    <Button
+        android:layout_marginStart="20dp"
+        android:id="@+id/updateButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Update" />
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:id="@+id/updateEmailTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#0000FF"
+        android:layout_marginEnd="20dp"
+        android:text="Change Email" />
+
+    <TextView
+        android:layout_marginStart="20dp"
+        android:id="@+id/updatePasswordTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#0000FF"
+        android:layout_marginEnd="20dp"
+        android:text="Change Password" />
+
+</LinearLayout>

@@ -25,11 +25,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
+<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.2.0'
+=======
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+>>>>>>> a978c0afe9533346cc91831fccffa722fa827043
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
-
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support:support-v4:29.0.1'
@@ -45,4 +49,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

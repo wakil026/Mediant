@@ -11,6 +11,13 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MedicineSearchListActivity"></activity>
         <activity android:name=".AmbulanceSearchListActivity" />
+        <activity android:name=".UpdatePasswordActivity"></activity>
+        <activity android:name=".UpdateEmailActivity" />
+        <activity android:name=".UpdateProfileActivity" />
+        <activity android:name=".ViewProfileActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".RemoveAdminActivity" />
+        <activity android:name=".AddAdminActivity" />
         <activity android:name=".SearchAmbulanceActivity" />
         <activity android:name=".SearchMedicineActivity" />
         <activity android:name=".AddMedicineActivity" />

@@ -3,6 +3,7 @@ This application is to help people for taking their medicine timely and to know 
 
 ### Features:
     - Medicine information 
-    - Searching medicine 
+    - Searching medicine
+    - Searching ambulance
     - Setting user medicine profile 
     - Alarm system
