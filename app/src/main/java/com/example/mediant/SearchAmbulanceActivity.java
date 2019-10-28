@@ -86,7 +86,7 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
     }
 
     public void searchaccordingcity(String s){
-        String inputText = s.toLowerCase().trim();
+        String inputText = s.trim();
         // Toast.makeText(getApplicationContext(),inputText,Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, AmbulanceSearchListActivity.class);
         Bundle bundle = new Bundle();

@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MedicineSearchListActivity"></activity>
         <activity android:name=".AmbulanceSearchListActivity" />
         <activity android:name=".SearchAmbulanceActivity" />
         <activity android:name=".SearchMedicineActivity" />

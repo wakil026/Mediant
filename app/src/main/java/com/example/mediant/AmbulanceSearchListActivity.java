@@ -28,12 +28,14 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ambulance_search_list);
+
         mrecyclerView = findViewById(R.id.recycler_view);
         mrecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mrecyclerView.setLayoutManager(layoutManager);
         Bundle bundle = getIntent().getExtras();
         String search_data = bundle.getString("value");
+        getSupportActionBar().setTitle(search_data);
         String searchType = bundle.getString("type");
         firebaseFirestore = FirebaseFirestore.getInstance();
 
