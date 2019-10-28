@@ -10,6 +10,5 @@
     <string-array name="Searching_Ambulance">
         <item>City</item>
         <item>Name</item>
-        <item>Contact Number</item>
     </string-array>
 </resources>
