@@ -121,6 +121,8 @@ public class HomeAdminActivity extends AppCompatActivity {
     }
 
     public void removingmedicine(){
+        Intent intent = new Intent(this, RemoveMedicineActivity.class);
+        startActivity(intent);
 
     }
     
@@ -131,6 +133,7 @@ public class HomeAdminActivity extends AppCompatActivity {
     }
 
     public void removingambulance(){
-
+        Intent intent = new Intent(this, RemoveAmbulanceActivity.class);
+        startActivity(intent);
     }
 }
