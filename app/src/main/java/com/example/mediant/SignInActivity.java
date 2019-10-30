@@ -42,6 +42,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private TextView forgotPasswordTextView;
     private ProgressBar signInProgressBar;
 
+    public static String type;
     private String KEY_NAME = "Name";
     private String KEY_EMAIL = "Email";
     private String KEY_TYPE = "Type";
@@ -152,7 +153,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.exists()){
-                            String type = documentSnapshot.getString(KEY_TYPE);
+                            type = documentSnapshot.getString(KEY_TYPE);
                             signInProgressBar.setVisibility(View.GONE);
                             if(type.equals("Admin")){
                                 finish();
@@ -184,7 +185,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private void checkIfVerified(FirebaseUser user,String type) {
         if(user.isEmailVerified()) {
             finish();
-            Intent intent = new Intent(getApplicationContext(),UserHomeActivity.class);
+            Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             Toast.makeText(getApplicationContext(), type, Toast.LENGTH_SHORT).show();

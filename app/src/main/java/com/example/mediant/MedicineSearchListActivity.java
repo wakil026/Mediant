@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,6 +24,7 @@ public class MedicineSearchListActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     FirebaseFirestore firebaseFirestore;
     CustomAdapterforMedicine adapter;
+    int x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +37,72 @@ public class MedicineSearchListActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String search_data = bundle.getString("value");
         getSupportActionBar().setTitle(search_data);
+        String searchType = bundle.getString("type");
         firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("Medicine Information").whereEqualTo("brandName", search_data.toLowerCase().trim())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                        for (DocumentSnapshot doc : task.getResult()) {
-                            ModelforMedicine model = new ModelforMedicine(doc.getString("brandName"),
-                                    doc.getString("genericName")
-                            );
-                            modelList.add(model);
+        if (searchType.equals("Brand Name")) {
+            x=0;
+            firebaseFirestore.collection("Medicine Information").whereEqualTo("brandName", search_data.toLowerCase().trim())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                x=1;
+                                ModelforMedicine model = new ModelforMedicine(doc.getString("brandName"),
+                                        doc.getString("genericName")
+                                );
+                                modelList.add(model);
+
+                            }
+                            if(x==1) {
+                                adapter = new CustomAdapterforMedicine(MedicineSearchListActivity.this, modelList);
+                                mrecyclerView.setAdapter(adapter);
+                            }
+                            else Toast.makeText(getApplicationContext(),"Sorry! No information available.",Toast.LENGTH_LONG).show();
 
                         }
-                        adapter = new CustomAdapterforMedicine(MedicineSearchListActivity.this, modelList);
-                        mrecyclerView.setAdapter(adapter);
+                    })
 
-                    }
-                })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        }
+        else{
+            x=0;
+            firebaseFirestore.collection("Medicine Information").whereEqualTo("genericName", search_data.toLowerCase().trim())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                    }
-                });
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                x=1;
+                                ModelforMedicine model = new ModelforMedicine(doc.getString("brandName"),
+                                        doc.getString("genericName")
+                                );
+                                modelList.add(model);
+
+                            }
+                            if(x==1) {
+                                adapter = new CustomAdapterforMedicine(MedicineSearchListActivity.this, modelList);
+                                mrecyclerView.setAdapter(adapter);
+                            }
+                            else Toast.makeText(getApplicationContext(),"Sorry! No information available.",Toast.LENGTH_LONG).show();
+
+                        }
+                    })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }
     }
 }

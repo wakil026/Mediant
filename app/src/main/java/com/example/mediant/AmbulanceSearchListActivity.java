@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +25,7 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     FirebaseFirestore firebaseFirestore;
     CustomAdapter adapter;
+    int x;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         if(searchType.equals("city")) {
+            x=0;
             firebaseFirestore.collection("Ambulance").whereEqualTo("Service Area", search_data.toLowerCase().trim())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -47,14 +50,19 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                             for (DocumentSnapshot doc : task.getResult()) {
+                                x=1;
                                 Model model = new Model(doc.getString("Name"),
                                         doc.getString("Contact Number")
                                 );
                                 modelList.add(model);
 
                             }
-                            adapter = new CustomAdapter(AmbulanceSearchListActivity.this, modelList);
-                            mrecyclerView.setAdapter(adapter);
+                            if(x==1) {
+                                adapter = new CustomAdapter(AmbulanceSearchListActivity.this, modelList);
+                                mrecyclerView.setAdapter(adapter);
+                            }
+                            else Toast.makeText(getApplicationContext(),"Sorry! No information available.",Toast.LENGTH_LONG).show();
+
 
                         }
                     })
@@ -67,6 +75,7 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
                     });
         }
         else{
+            x=0;
             firebaseFirestore.collection("Ambulance").whereEqualTo("Name", search_data.toLowerCase().trim())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -74,14 +83,19 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                             for (DocumentSnapshot doc : task.getResult()) {
+                                x=1;
                                 Model model = new Model(doc.getString("Name"),
                                         doc.getString("Contact Number")
                                 );
                                 modelList.add(model);
 
                             }
-                            adapter = new CustomAdapter(AmbulanceSearchListActivity.this, modelList);
-                            mrecyclerView.setAdapter(adapter);
+                            if(x==1) {
+                                adapter = new CustomAdapter(AmbulanceSearchListActivity.this, modelList);
+                                mrecyclerView.setAdapter(adapter);
+                            }
+                            else Toast.makeText(getApplicationContext(),"Sorry! No information available.",Toast.LENGTH_LONG).show();
+
 
                         }
                     })
