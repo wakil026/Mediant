@@ -29,7 +29,6 @@
         <activity android:name=".AllMedicineActivity" />
         <activity android:name=".AllAmbulanceActivity" />
         <activity android:name=".AddAmbulanceActivity" />
-        <activity android:name=".UserHomeActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />

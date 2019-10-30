@@ -21,6 +21,7 @@ public class AddAdminActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private EditText newAdminEmail;
     private Button addButton;
+    private String KEY_TYPE = "Type";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class AddAdminActivity extends AppCompatActivity {
 
     private void addAdmin(final String email) {
         Map<String,Object> user = new HashMap<>();
-        user.put("type","Admin");
+        user.put(KEY_TYPE,"Admin");
         firebaseFirestore.collection("UserData").document(email).update(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

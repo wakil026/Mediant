@@ -1,5 +1,6 @@
 package com.example.mediant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,10 +9,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeActivity extends AppCompatActivity {
+
     Button allmedicine,searchMedicine;
     Button mymedicine;
     Button findAmbulance,allAmbulance;
@@ -25,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         findAmbulance = findViewById(R.id.button_findambu);
         allAmbulance = findViewById(R.id.button_allAmbulance);
         searchMedicine = findViewById(R.id.button_searchMedicine);
+
 
         allmedicine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +101,16 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu1) {
-        getMenuInflater().inflate(R.menu.menu_layout, menu1);
-        return true;
+        //Toast.makeText(this, ""+SignInActivity.type, Toast.LENGTH_SHORT).show();
+        String type = SignInActivity.type;
+        if(type.equals("Admin")) {
+            getMenuInflater().inflate(R.menu.menu_layout, menu1);
+            return true;
+        }
+        else{
+            getMenuInflater().inflate(R.menu.user_menu_layout, menu1);
+            return true;
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

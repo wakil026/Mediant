@@ -21,6 +21,7 @@ public class RemoveAdminActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private EditText removeAdminEmail;
     private Button removeButton;
+    private String KEY_TYPE = "Type";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class RemoveAdminActivity extends AppCompatActivity {
 
     private void removeAdmin(final String email) {
         Map<String,Object> user = new HashMap<>();
-        user.put("type","User");
+        user.put(KEY_TYPE,"User");
         firebaseFirestore.collection("UserData").document(email).update(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

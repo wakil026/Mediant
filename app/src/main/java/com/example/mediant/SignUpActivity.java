@@ -39,8 +39,8 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
     private String KEY_NAME = "Name";
     private String KEY_EMAIL = "Email";
     private String KEY_TYPE = "Type";
-    private String KEY_BLOOD_GROUP = "Blood Group:";
-    private String KEY_AGE = "Age:";
+    private String KEY_BLOOD_GROUP = "Blood Group";
+    private String KEY_AGE = "Age";
     private String KEY_CITY = "City";
 
 
