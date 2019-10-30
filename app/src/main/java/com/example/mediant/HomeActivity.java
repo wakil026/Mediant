@@ -12,7 +12,9 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
-    Button allmedicine,mymedicine,findambu;
+    Button allmedicine,searchMedicine;
+    Button mymedicine;
+    Button findAmbulance,allAmbulance;
     private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +22,21 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         allmedicine = findViewById(R.id.button_allmedicine);
         mymedicine = findViewById(R.id.button_mymedicine);
-        findambu = findViewById(R.id.button_findambu);
+        findAmbulance = findViewById(R.id.button_findambu);
+        allAmbulance = findViewById(R.id.button_allAmbulance);
+        searchMedicine = findViewById(R.id.button_searchMedicine);
 
         allmedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 show_allmedicine();
+            }
+        });
+
+        searchMedicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search_medicine();
             }
         });
 
@@ -36,13 +47,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        findambu.setOnClickListener(new View.OnClickListener() {
+        findAmbulance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show_ambulance();
+                search_ambulance();
             }
         });
 
+        allAmbulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                all_ambulance();
+            }
+        });
 
     }
     public void show_allmedicine() {
@@ -55,7 +72,17 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void show_ambulance(){
+    public void search_medicine(){
+        Intent intent = new Intent(this, SearchMedicineActivity.class);
+        startActivity(intent);
+    }
+
+    public void search_ambulance(){
+        Intent intent = new Intent(this, SearchAmbulanceActivity.class);
+        startActivity(intent);
+    }
+
+    public void all_ambulance(){
         Intent intent = new Intent(this, AllAmbulanceActivity.class);
         startActivity(intent);
 
