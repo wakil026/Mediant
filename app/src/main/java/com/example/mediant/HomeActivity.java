@@ -115,10 +115,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.adminAboutUs:
+            case R.id.about_us:
                 // do your code
                 return true;
-            case R.id.adminProfileId:
+            case R.id.profileId:
                 intent = new Intent(this,ViewProfileActivity.class);
                 startActivity(intent);
                 return true;
@@ -127,7 +127,7 @@ public class HomeActivity extends AppCompatActivity {
                 intent = new Intent(this, HomeAdminActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.adminSignOut:
+            case R.id.sign_out:
                FirebaseAuth.getInstance().signOut();
                finish();
                intent = new Intent(getApplicationContext(),SignInActivity.class);

@@ -46,7 +46,6 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
                     return false;
                 }
             });
-
         }
 
         else if(item.equals("Name")){
