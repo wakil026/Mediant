@@ -42,7 +42,8 @@ public class AllAmbulanceActivity extends AppCompatActivity {
 
                         for (DocumentSnapshot doc : task.getResult()) {
                             Model model = new Model(doc.getString("Name"),
-                                    doc.getString("Contact Number")
+                                    doc.getString("Contact Number"),
+                                    doc.getString("Service Area")
                             );
                             modelList.add(model);
 

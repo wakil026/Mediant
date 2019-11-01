@@ -28,7 +28,7 @@ public class CustomAdapterforAllAmbulance extends RecyclerView.Adapter<ViewHolde
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_layout, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_all_ambulance, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
 
         viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
@@ -49,6 +49,7 @@ public class CustomAdapterforAllAmbulance extends RecyclerView.Adapter<ViewHolde
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ambulanceName.setText(modelList.get(position).getName());
         holder.contactNumber.setText(modelList.get(position).getContactNumber());
+        holder.serviceArea.setText(modelList.get(position).getServiceArea());
         //
     }
 
