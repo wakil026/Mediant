@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ViewHolder extends RecyclerView.ViewHolder {
     TextView ambulanceName;
     TextView contactNumber;
+    TextView serviceArea;
     View mView;
 
     public ViewHolder(@NonNull View itemView) {
@@ -35,6 +36,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
         ambulanceName = itemView.findViewById(R.id.ambulanceName);
         contactNumber = itemView.findViewById(R.id.ambulanceNumber);
+        serviceArea = itemView.findViewById(R.id.ambulanceArea);
 
     }
 
