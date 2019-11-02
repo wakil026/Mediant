@@ -48,20 +48,6 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private String KEY_TYPE = "Type";
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    private void updateUI(FirebaseUser currentUser) {
-        if(currentUser != null) {
-            checkUsertype(currentUser.getEmail());
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
