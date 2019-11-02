@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -54,7 +55,9 @@ public class MedicineSearchListActivity extends AppCompatActivity {
                                         doc.getString("genericName"),
                                         doc.getString("type"),
                                         doc.getString("contains"),
-                                        doc.getString("companyName")
+                                        doc.getString("companyName"),
+                                        doc.getString("indications"),
+                                        doc.getString("sideEffect")
                                 );
                                 modelList.add(model);
 
@@ -110,5 +113,43 @@ public class MedicineSearchListActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+    public void showDetails(final int position){
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Medicine Information").document(modelList.get(position).getBrandName())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String brandName = modelList.get(position).getBrandName();
+                        String genericName = modelList.get(position).getGenericName();
+                        String companyName = modelList.get(position).getCompanyName();
+                        String type = modelList.get(position).getType();
+                        String indication = modelList.get(position).getIndications();
+                        String sideEffect = modelList.get(position).getSideEffect();
+                        String medicineContain = modelList.get(position).getContains();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("brandName",brandName);
+                        bundle.putString("genericName",genericName);
+                        bundle.putString("medicineContain",medicineContain);
+                        bundle.putString("companyName",companyName);
+                        bundle.putString("type",type);
+                        bundle.putString("indication",indication);
+                        bundle.putString("sideEffect",sideEffect);
+                        Intent intent = new Intent(getApplicationContext(), MedicineDetailsActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+
+                    }
+                })
+
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
     }
 }

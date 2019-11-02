@@ -2,6 +2,7 @@ package com.example.mediant;
 
 //import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
         viewHolder.setOnClickListener(new ViewHolderforMedicine.ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                listActivity.showDetails(position);
 
             }
 
@@ -58,4 +60,5 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
     public int getItemCount() {
         return modelList.size();
     }
+
 }

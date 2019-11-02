@@ -32,6 +32,7 @@ public class CustomAdapterforMedicine extends RecyclerView.Adapter<ViewHolderfor
         viewHolder.setOnClickListener(new ViewHolderforMedicine.ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                listActivity.showDetails(position);
 
             }
 
