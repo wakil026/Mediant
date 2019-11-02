@@ -99,7 +99,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         MedicineInfo medicineInfo = new MedicineInfo(brand,generic,contains,type,company,indications,sideEffects);
 
-        collectionReference.document(""+brand+generic).set(medicineInfo)
+        collectionReference.document(""+brand+generic+type+contains).set(medicineInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
