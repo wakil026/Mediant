@@ -19,6 +19,14 @@ public class MedicineInfo {
         this.sideEffcet = sideEffcet;
     }
 
+    public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName) {
+        this.brandName = brandName;
+        this.genericName = genericName;
+        this.contains = contains;
+        this.type = type;
+        this.companyName = companyName;
+    }
+
     public String getBrandName() {
         return brandName;
     }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicineSearchListActivity extends AppCompatActivity {
-    List<ModelforMedicine> modelList = new ArrayList<>();
+    List<MedicineInfo> modelList = new ArrayList<>();
     RecyclerView mrecyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseFirestore firebaseFirestore;
@@ -42,7 +42,7 @@ public class MedicineSearchListActivity extends AppCompatActivity {
 
         if (searchType.equals("Brand Name")) {
             x=0;
-            firebaseFirestore.collection("Medicine Information").whereEqualTo("brandName", search_data.toLowerCase().trim())
+            firebaseFirestore.collection("Medicine Information").whereEqualTo("brandName", search_data.toUpperCase().trim())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -50,8 +50,11 @@ public class MedicineSearchListActivity extends AppCompatActivity {
 
                             for (DocumentSnapshot doc : task.getResult()) {
                                 x=1;
-                                ModelforMedicine model = new ModelforMedicine(doc.getString("brandName"),
-                                        doc.getString("genericName")
+                                MedicineInfo model = new MedicineInfo(doc.getString("brandName"),
+                                        doc.getString("genericName"),
+                                        doc.getString("type"),
+                                        doc.getString("contains"),
+                                        doc.getString("companyName")
                                 );
                                 modelList.add(model);
 
@@ -82,8 +85,11 @@ public class MedicineSearchListActivity extends AppCompatActivity {
 
                             for (DocumentSnapshot doc : task.getResult()) {
                                 x=1;
-                                ModelforMedicine model = new ModelforMedicine(doc.getString("brandName"),
-                                        doc.getString("genericName")
+                                MedicineInfo model = new MedicineInfo(doc.getString("brandName"),
+                                        doc.getString("genericName"),
+                                        doc.getString("type"),
+                                        doc.getString("contains"),
+                                        doc.getString("companyName")
                                 );
                                 modelList.add(model);
 

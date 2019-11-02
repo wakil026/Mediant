@@ -13,10 +13,10 @@ import java.util.List;
 
 public class CustomAdapterforMedicine extends RecyclerView.Adapter<ViewHolderforMedicine>{
     MedicineSearchListActivity listActivity;
-    List<ModelforMedicine> modelList;
+    List<MedicineInfo> modelList;
     Context context;
 
-    public CustomAdapterforMedicine(MedicineSearchListActivity listActivity, List<ModelforMedicine> modelList) {
+    public CustomAdapterforMedicine(MedicineSearchListActivity listActivity, List<MedicineInfo> modelList) {
         this.listActivity = listActivity;
         this.modelList = modelList;
 
@@ -47,6 +47,9 @@ public class CustomAdapterforMedicine extends RecyclerView.Adapter<ViewHolderfor
     public void onBindViewHolder(@NonNull ViewHolderforMedicine holder, int position) {
         holder.brandName.setText(modelList.get(position).getBrandName());
         holder.genericName.setText(modelList.get(position).getGenericName());
+        holder.medicineType.setText(modelList.get(position).getType());
+        holder.medicineContains.setText(modelList.get(position).getContains());
+        holder.companyName.setText(modelList.get(position).getCompanyName());
         //
     }
 

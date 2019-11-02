@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AllMedicineActivity extends AppCompatActivity {
 
-    List<ModelforMedicine> modelList = new ArrayList<>();
+    List<MedicineInfo> modelList = new ArrayList<>();
     RecyclerView mrecyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseFirestore firebaseFirestore;
@@ -40,8 +40,11 @@ public class AllMedicineActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                         for (DocumentSnapshot doc : task.getResult()) {
-                            ModelforMedicine model = new ModelforMedicine(doc.getString("brandName"),
-                                    doc.getString("genericName")
+                            MedicineInfo model = new MedicineInfo(doc.getString("brandName"),
+                                    doc.getString("genericName"),
+                                    doc.getString("type"),
+                                    doc.getString("contains"),
+                                    doc.getString("companyName")
                             );
                             modelList.add(model);
 
