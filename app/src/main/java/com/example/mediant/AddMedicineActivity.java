@@ -99,7 +99,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         MedicineInfo medicineInfo = new MedicineInfo(brand,generic,contains,type,company,indications,sideEffects);
         String docname = ""+brand+generic+type+contains;
-        docname = docname.replaceAll("[^A-Za-z0-9]","").trim();
+        docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
         collectionReference.document(""+docname).set(medicineInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
