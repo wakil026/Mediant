@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="20dp"
-    android:orientation="vertical"
     tools:context=".AddMedicineActivity">
-
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:layout_marginTop="20dp"
         android:hint="Brand Name"
@@ -19,6 +21,14 @@
 
     <EditText
         android:layout_marginTop="20dp"
+        android:hint="Medicine Type(Syrup / Tablet)"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/medicineTypeEditTextId"
+        android:inputType=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_marginTop="20dp"
         android:hint="Generic Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/GenericEditTextId"
@@ -28,12 +38,40 @@
 
     <EditText
         android:layout_marginTop="20dp"
-        android:hint="Description"
+        android:hint="Contains (mg/ml)"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:id="@+id/DescriptionEditTextId"
+        android:id="@+id/containsEditTextId"
+        android:inputType=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:hint="Company Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/companyNameEditTextId"
+        android:inputType=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:hint="Indications"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/indicationsEditTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:hint="Side Effects"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/sideEffectsEditTextId"
+        android:inputType=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/SaveButtonId"
@@ -41,5 +79,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Save" />
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
