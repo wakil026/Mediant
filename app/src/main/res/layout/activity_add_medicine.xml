@@ -15,7 +15,7 @@
         android:hint="Brand Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/BrandNameEditTextId"
-        android:inputType=""
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -24,7 +24,7 @@
         android:hint="Medicine Type(Syrup / Tablet)"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/medicineTypeEditTextId"
-        android:inputType=""
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
@@ -32,7 +32,7 @@
         android:hint="Generic Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/GenericEditTextId"
-        android:inputType=""
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -41,7 +41,7 @@
         android:hint="Contains (mg/ml)"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/containsEditTextId"
-        android:inputType=""
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -51,7 +51,7 @@
         android:hint="Company Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/companyNameEditTextId"
-        android:inputType=""
+        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -69,7 +69,7 @@
         android:hint="Side Effects"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/sideEffectsEditTextId"
-        android:inputType=""
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
