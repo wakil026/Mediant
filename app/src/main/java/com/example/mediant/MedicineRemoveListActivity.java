@@ -48,9 +48,9 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
                             x=1;
                             MedicineInfo model = new MedicineInfo(doc.getString("brandName"),
                                     doc.getString("genericName"),
-                                    doc.getString("companyName"),
                                     doc.getString("contains"),
-                                    doc.getString("type")
+                                    doc.getString("type"),
+                                    doc.getString("companyName")
                             );
                             modelList.add(model);
 
@@ -81,6 +81,7 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
         String contains = modelList.get(index).getContains();
         String docname = ""+brandName+genericName+type+contains;
         docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
+        //Toast.makeText(getApplicationContext(),docname,Toast.LENGTH_LONG).show();
         firebaseFirestore.collection("Medicine Information").document(docname)
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
