@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".ViewProfileActivity">
 
 
@@ -17,8 +19,8 @@
 
 
     <TextView
-        android:layout_marginLeft="15dp"
         android:id="@+id/profileUsernameId"
+        android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
@@ -28,8 +30,8 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginLeft="15dp"
         android:id="@+id/profileEmailId"
+        android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileUsernameId"
@@ -39,7 +41,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginLeft="15dp"
+        android:padding="15dp"
         android:id="@+id/profileAgeId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +52,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginLeft="15dp"
+        android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileAgeId"
@@ -61,7 +63,7 @@
         android:textStyle="bold"
         />
     <TextView
-        android:layout_marginLeft="15dp"
+        android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileBloodGroupId"
@@ -72,54 +74,59 @@
         android:textStyle="bold"
         />
     <TextView
-        android:layout_marginLeft="150dp"
+        android:padding="15dp"
         android:id="@+id/usernameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
+        android:layout_toRightOf="@+id/profileUsernameId"
         android:textColor="#000000"
         android:textSize="15sp"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginLeft="150dp"
+        android:padding="15dp"
         android:id="@+id/emailId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profileUsernameId"
+        android:layout_below="@+id/usernameId"
+        android:layout_toRightOf="@+id/profileEmailId"
         android:textColor="#000000"
         android:textSize="15sp"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginLeft="150dp"
+        android:padding="15dp"
         android:id="@+id/ageId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profileEmailId"
+        android:layout_below="@+id/emailId"
+        android:layout_toRightOf="@+id/profileAgeId"
         android:textColor="#000000"
         android:textSize="15sp" />
 
     <TextView
-        android:layout_marginLeft="150dp"
+        android:padding="15dp"
         android:id="@+id/bloodGroupId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profileAgeId"
+        android:layout_below="@+id/ageId"
+        android:layout_toRightOf="@+id/profileBloodGroupId"
         android:textColor="#000000"
         android:textSize="15sp" />
 
     <TextView
-        android:layout_marginLeft="150dp"
+        android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bloodGroupId"
+        android:layout_toRightOf="@id/profileCityId"
         android:id="@+id/cityId"
         android:textColor="#000000"
         android:textSize="15sp"
         />
     <TextView
-        android:layout_marginLeft="100dp"
+        android:padding="15dp"
         android:paddingTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
