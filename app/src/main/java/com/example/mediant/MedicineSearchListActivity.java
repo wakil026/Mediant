@@ -92,7 +92,9 @@ public class MedicineSearchListActivity extends AppCompatActivity {
                                         doc.getString("genericName"),
                                         doc.getString("type"),
                                         doc.getString("contains"),
-                                        doc.getString("companyName")
+                                        doc.getString("companyName"),
+                                        doc.getString("indications"),
+                                        doc.getString("sideEffect")
                                 );
                                 modelList.add(model);
 

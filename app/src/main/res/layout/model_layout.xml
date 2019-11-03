@@ -24,6 +24,12 @@
             android:textSize="25sp"
             android:text="Contact Number"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ambulanceArea"
+            android:textSize="25sp"
+            android:text = "Area"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

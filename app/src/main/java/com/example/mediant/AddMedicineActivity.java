@@ -63,13 +63,13 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     protected void saveData(View v) {
 
-        String brand = brandNameEditText.getText().toString().toUpperCase();
-        String generic = genericEditText.getText().toString().toLowerCase();
-        String indications = indicationsEditText.getText().toString();
-        String contains = containsEditText.getText().toString();
-        String type = typeEditText.getText().toString();
-        String sideEffects = sideEffectsEditText.getText().toString();
-        String company = companyEditText.getText().toString();
+        String brand = brandNameEditText.getText().toString().toUpperCase().trim();
+        String generic = genericEditText.getText().toString().toLowerCase().trim();
+        String indications = indicationsEditText.getText().toString().trim();
+        String contains = containsEditText.getText().toString().trim();
+        String type = typeEditText.getText().toString().trim();
+        String sideEffects = sideEffectsEditText.getText().toString().trim();
+        String company = companyEditText.getText().toString().trim();
 
         if(brand.isEmpty()){
             brandNameEditText.setError("This field cannot be empty");
