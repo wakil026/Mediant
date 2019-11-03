@@ -7,7 +7,7 @@ public class MedicineInfo {
     private String type;
     private String companyName;
     private String indications;
-    private String sideEffcet;
+    private String sideEffect;
 
     public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName, String indications, String sideEffcet) {
         this.brandName = brandName;
@@ -16,7 +16,15 @@ public class MedicineInfo {
         this.type = type;
         this.companyName = companyName;
         this.indications = indications;
-        this.sideEffcet = sideEffcet;
+        this.sideEffect = sideEffcet;
+    }
+
+    public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName) {
+        this.brandName = brandName;
+        this.genericName = genericName;
+        this.contains = contains;
+        this.type = type;
+        this.companyName = companyName;
     }
 
     public String getBrandName() {
@@ -68,12 +76,12 @@ public class MedicineInfo {
         this.indications = indications;
     }
 
-    public String getSideEffcet() {
-        return sideEffcet;
+    public String getSideEffect() {
+        return sideEffect;
     }
 
-    public void setSideEffcet(String sideEffcet) {
-        this.sideEffcet = sideEffcet;
+    public void setSideEffcet(String sideEffect) {
+        this.sideEffect = sideEffect;
     }
 
 }

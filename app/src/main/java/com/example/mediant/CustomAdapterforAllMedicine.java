@@ -1,8 +1,8 @@
 package com.example.mediant;
 
 //import android.app.ListActivity;
-import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +15,10 @@ import java.util.List;
 public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolderforMedicine> {
 
     AllMedicineActivity listActivity;
-    List<ModelforMedicine> modelList;
+    List<MedicineInfo> modelList;
     Context context;
 
-    public CustomAdapterforAllMedicine(AllMedicineActivity listActivity, List<ModelforMedicine> modelList) {
+    public CustomAdapterforAllMedicine(AllMedicineActivity listActivity, List<MedicineInfo> modelList) {
         this.listActivity = listActivity;
         this.modelList = modelList;
 
@@ -34,6 +34,7 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
         viewHolder.setOnClickListener(new ViewHolderforMedicine.ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                listActivity.showDetails(position);
 
             }
 
@@ -49,6 +50,9 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
     public void onBindViewHolder(@NonNull ViewHolderforMedicine holder, int position) {
         holder.brandName.setText(modelList.get(position).getBrandName());
         holder.genericName.setText(modelList.get(position).getGenericName());
+        holder.medicineType.setText(modelList.get(position).getType());
+        holder.medicineContains.setText(modelList.get(position).getContains());
+        holder.companyName.setText(modelList.get(position).getCompanyName());
         //
     }
 
@@ -56,4 +60,5 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
     public int getItemCount() {
         return modelList.size();
     }
+
 }

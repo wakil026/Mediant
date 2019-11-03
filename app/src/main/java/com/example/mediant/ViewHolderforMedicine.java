@@ -11,6 +11,9 @@ import java.util.Objects;
 public class ViewHolderforMedicine extends RecyclerView.ViewHolder {
     TextView brandName;
     TextView genericName;
+    TextView medicineContains;
+    TextView medicineType;
+    TextView companyName;
     View mView;
 
     public ViewHolderforMedicine(@NonNull View itemView) {
@@ -35,6 +38,10 @@ public class ViewHolderforMedicine extends RecyclerView.ViewHolder {
 
         brandName = itemView.findViewById(R.id.medicineBrandName);
         genericName = itemView.findViewById(R.id.medicineGenericName);
+        companyName = itemView.findViewById(R.id.companyName);
+        medicineContains = itemView.findViewById(R.id.medicineContains);
+        medicineType = itemView.findViewById(R.id.medicineType);
+
 
     }
 
