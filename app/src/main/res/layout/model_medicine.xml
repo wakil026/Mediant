@@ -33,14 +33,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/medicineBrandName"
             android:text="Contains"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/companyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/medicineGenericName"
-            android:textColor="#00ff00"
+            android:textColor="#056608"
             android:text="Company"
             android:textSize="20sp" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="Generic"
             android:layout_below="@+id/medicineContains"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

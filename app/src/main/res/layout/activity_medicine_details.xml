@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MedicineDetailsActivity">
+
+    <RelativeLayout
+        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/medicineBrandName"
         android:layout_width="wrap_content"
@@ -27,16 +33,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/medicineBrandName"
         android:text="Contains"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/companyName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/medicineGenericName"
-        android:textColor="#00ff00"
+        android:textColor="#056608"
         android:text="Company"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/medicineGenericName"
@@ -44,25 +50,47 @@
         android:layout_height="wrap_content"
         android:text="Generic"
         android:layout_below="@+id/medicineContains"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/indicationsTextView"
+        android:layout_below="@+id/companyName"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="Indications:"
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/medicineIndications"
-        android:layout_below="@+id/companyName"
+        android:layout_below="@+id/indicationsTextView"
         android:text="Indications"
         android:textSize="20sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/medicineSideEffects"
+        android:id="@+id/sideEffectsTextView"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_below="@+id/medicineIndications"
+        android:text="Side Effects:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/medicineSideEffects"
+        android:layout_below="@+id/sideEffectsTextView"
         android:text="Side Effects"
         android:textSize="20sp"/>
 
 
+    </RelativeLayout>
 
-
-</RelativeLayout>
+</ScrollView>
