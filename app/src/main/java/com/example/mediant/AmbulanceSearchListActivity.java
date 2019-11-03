@@ -43,7 +43,7 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
 
         if(searchType.equals("city")) {
             x=0;
-            firebaseFirestore.collection("Ambulance").whereEqualTo("Service Area", search_data.toLowerCase().trim())
+            firebaseFirestore.collection("Ambulance").whereEqualTo("Service Area", search_data.toUpperCase().trim())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -52,7 +52,8 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
                             for (DocumentSnapshot doc : task.getResult()) {
                                 x=1;
                                 Model model = new Model(doc.getString("Name"),
-                                        doc.getString("Contact Number")
+                                        doc.getString("Contact Number"),
+                                        doc.getString("Service Area")
                                 );
                                 modelList.add(model);
 
@@ -76,7 +77,7 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
         }
         else{
             x=0;
-            firebaseFirestore.collection("Ambulance").whereEqualTo("Name", search_data.toLowerCase().trim())
+            firebaseFirestore.collection("Ambulance").whereEqualTo("Name", search_data.toUpperCase().trim())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -85,7 +86,8 @@ public class AmbulanceSearchListActivity extends AppCompatActivity {
                             for (DocumentSnapshot doc : task.getResult()) {
                                 x=1;
                                 Model model = new Model(doc.getString("Name"),
-                                        doc.getString("Contact Number")
+                                        doc.getString("Contact Number"),
+                                        doc.getString("Service Area")
                                 );
                                 modelList.add(model);
 

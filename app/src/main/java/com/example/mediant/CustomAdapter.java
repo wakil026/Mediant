@@ -49,6 +49,7 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ambulanceName.setText(modelList.get(position).getName());
         holder.contactNumber.setText(modelList.get(position).getContactNumber());
+        holder.serviceArea.setText(modelList.get(position).getServiceArea());
         //
     }
 

@@ -74,7 +74,11 @@ public class AmbulanceRemoveListActivity extends AppCompatActivity {
     }
     public void deleteAmbulanceData(int index){
         firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("Ambulance").document(modelList.get(index).getContactNumber())
+        String ambulanceName = modelList.get(index).getName();
+        String serviceArea = modelList.get(index).getServiceArea();
+        String docname = ""+ambulanceName+serviceArea;
+        docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
+        firebaseFirestore.collection("Ambulance").document(docname)
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
