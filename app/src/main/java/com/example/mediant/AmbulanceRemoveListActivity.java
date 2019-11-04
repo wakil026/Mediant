@@ -39,7 +39,7 @@ public class AmbulanceRemoveListActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String search_data = bundle.getString("value");
         getSupportActionBar().setTitle(search_data);
-        firebaseFirestore.collection("Ambulance").whereEqualTo("Name", search_data.toLowerCase().trim())
+        firebaseFirestore.collection("Ambulance").whereEqualTo("Name", search_data.toUpperCase().trim())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

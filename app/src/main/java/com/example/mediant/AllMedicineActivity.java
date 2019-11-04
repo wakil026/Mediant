@@ -43,8 +43,8 @@ public class AllMedicineActivity extends AppCompatActivity {
                         for (DocumentSnapshot doc : task.getResult()) {
                             MedicineInfo model = new MedicineInfo(doc.getString("brandName"),
                                     doc.getString("genericName"),
-                                    doc.getString("type"),
                                     doc.getString("contains"),
+                                    doc.getString("type"),
                                     doc.getString("companyName"),
                                     doc.getString("indications"),
                                     doc.getString("sideEffect")

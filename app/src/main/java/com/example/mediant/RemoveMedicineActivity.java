@@ -21,10 +21,10 @@ public class RemoveMedicineActivity extends AppCompatActivity {
         medicineNameEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String inputText = medicineNameEnter.getText().toString().toLowerCase().trim();
+                String inputText = medicineName.getText().toString().toUpperCase().trim();
                 // Toast.makeText(getApplicationContext(),inputText,Toast.LENGTH_LONG).show();
                 if(inputText.isEmpty()){
-                    medicineNameEnter.setError("Enter the Ambulance name");
+                    medicineNameEnter.setError("Enter the Medicine name");
                     medicineNameEnter.requestFocus();
                     return;
                 }
