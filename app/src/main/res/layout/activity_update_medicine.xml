@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".UpdateMedicineActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Brand Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateBrandNameEditTextId"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Medicine Type(Syrup / Tablet)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateMedicineTypeEditTextId"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Generic Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateGenericEditTextId"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Contains (mg/ml)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateContainsEditTextId"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Company Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateCompanyNameEditTextId"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Indications"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateIndicationsEditTextId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:hint="Side Effects"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:id="@+id/updateSideEffectsEditTextId"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/updateButtonId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Update" />
+    </LinearLayout>
+
+</ScrollView>
