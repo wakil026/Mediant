@@ -9,14 +9,14 @@ public class MedicineInfo {
     private String indications;
     private String sideEffect;
 
-    public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName, String indications, String sideEffcet) {
+    public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName, String indications, String sideEffect) {
         this.brandName = brandName;
         this.genericName = genericName;
         this.contains = contains;
         this.type = type;
         this.companyName = companyName;
         this.indications = indications;
-        this.sideEffect = sideEffcet;
+        this.sideEffect = sideEffect;
     }
 
     public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName) {

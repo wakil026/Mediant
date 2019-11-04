@@ -1,6 +1,7 @@
 package com.example.mediant;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,10 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     FirebaseFirestore firebaseFirestore;
     CustomAdapterforRemoveMedicine adapter;
+    String brandName;
+    String genericName;
+    String type;
+    String contains;
     int x=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +78,36 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
                 });
 
     }
-    public void deleteMedicineData(int index){
+    public void getData(int index){
         firebaseFirestore = FirebaseFirestore.getInstance();
-        String brandName = modelList.get(index).getBrandName();
-        String genericName = modelList.get(index).getGenericName();
-        String type = modelList.get(index).getType();
-        String contains = modelList.get(index).getContains();
+        brandName = modelList.get(index).getBrandName();
+        genericName = modelList.get(index).getGenericName();
+        type = modelList.get(index).getType();
+        contains = modelList.get(index).getContains();
+    }
+
+    public void updateData(){
+        String docname = ""+brandName+genericName+type+contains;
+        docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
+        Intent intent = new Intent(getApplicationContext(),UpdateMedicineActivity.class);
+        intent.putExtra("docname",docname);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent,420);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 420:
+                if(resultCode == RESULT_OK){
+                    deleteMedicineData();
+                }
+        }
+    }
+
+    public void deleteMedicineData(){
         String docname = ""+brandName+genericName+type+contains;
         docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
         //Toast.makeText(getApplicationContext(),docname,Toast.LENGTH_LONG).show();
