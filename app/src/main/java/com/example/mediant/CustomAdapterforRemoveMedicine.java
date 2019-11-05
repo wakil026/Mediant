@@ -1,8 +1,8 @@
 package com.example.mediant;
 
-//import android.app.ListActivity;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolderforMedicine> {
-
-    AllMedicineActivity listActivity;
+public class CustomAdapterforRemoveMedicine extends RecyclerView.Adapter<ViewHolderforMedicine> {
+    MedicineRemoveListActivity listActivity;
     List<MedicineInfo> modelList;
     Context context;
 
-    public CustomAdapterforAllMedicine(AllMedicineActivity listActivity, List<MedicineInfo> modelList) {
+    public CustomAdapterforRemoveMedicine(MedicineRemoveListActivity listActivity, List<MedicineInfo> modelList) {
         this.listActivity = listActivity;
         this.modelList = modelList;
 
@@ -34,12 +33,26 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
         viewHolder.setOnClickListener(new ViewHolderforMedicine.ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                listActivity.showDetails(position);
 
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
+            public void onItemLongClick(View view, final int position) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(listActivity);
+                String options[] ={"Update","Delete"};
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        listActivity.getData(position);
+                        if(i==0){
+                            listActivity.updateData();
+                        }
+                        if(i==1){
+                            listActivity.deleteMedicineData();
+                        }
+
+                    }
+                }).create().show();
 
             }
         });
@@ -60,5 +73,4 @@ public class CustomAdapterforAllMedicine extends RecyclerView.Adapter<ViewHolder
     public int getItemCount() {
         return modelList.size();
     }
-
 }

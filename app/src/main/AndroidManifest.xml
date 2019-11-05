@@ -12,6 +12,9 @@
         <activity android:name=".ReminderDetailsActivity"></activity>
         <activity android:name=".ReminderDetails" />
         <activity android:name=".ReminderActivity" />
+        <activity android:name=".UpdateMedicineActivity">
+        <activity android:name=".MedicineRemoveListActivity" />
+        <activity android:name=".MedicineDetailsActivity" />
         <activity android:name=".AmbulanceRemoveListActivity" />
         <activity android:name=".RemoveAmbulanceActivity" />
         <activity android:name=".RemoveAmulanceActivity" />

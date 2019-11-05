@@ -47,16 +47,17 @@ public class AddAmbulanceActivity extends AppCompatActivity {
         });
     }
     public void saveinfo(){
-        String name = ambulanceName.getText().toString().trim();
+        String name = ambulanceName.getText().toString().trim().toUpperCase();
         String number = contactNumber.getText().toString().trim();
-        String service_city = city.getText().toString().trim();
+        String service_city = city.getText().toString().trim().toUpperCase();
         Map<String, Object> ambulance_data = new HashMap<>();
         ambulance_data.put(key_ambulance_name,name);
         ambulance_data.put(key_ambulance_number,number);
         ambulance_data.put(key_ambulance_area,service_city);
+        String docname = ""+name+service_city;
+        docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
 
-
-        firebaseFirestore.collection("Ambulance").document(number).set(ambulance_data)
+        firebaseFirestore.collection("Ambulance").document(docname).set(ambulance_data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

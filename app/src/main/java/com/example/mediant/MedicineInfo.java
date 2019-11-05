@@ -3,12 +3,28 @@ package com.example.mediant;
 public class MedicineInfo {
     private String brandName;
     private String genericName;
-    private String description;
+    private String contains;
+    private String type;
+    private String companyName;
+    private String indications;
+    private String sideEffect;
 
-    public MedicineInfo(String brandName, String genericName, String description) {
+    public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName, String indications, String sideEffect) {
         this.brandName = brandName;
         this.genericName = genericName;
-        this.description = description;
+        this.contains = contains;
+        this.type = type;
+        this.companyName = companyName;
+        this.indications = indications;
+        this.sideEffect = sideEffect;
+    }
+
+    public MedicineInfo(String brandName, String genericName, String contains, String type, String companyName) {
+        this.brandName = brandName;
+        this.genericName = genericName;
+        this.contains = contains;
+        this.type = type;
+        this.companyName = companyName;
     }
 
     public String getBrandName() {
@@ -27,11 +43,45 @@ public class MedicineInfo {
         this.genericName = genericName;
     }
 
-    public String getDescription() {
-        return description;
+
+    public String getContains() {
+        return contains;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContains(String contains) {
+        this.contains = contains;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getIndications() {
+        return indications;
+    }
+
+    public void setIndications(String indications) {
+        this.indications = indications;
+    }
+
+    public String getSideEffect() {
+        return sideEffect;
+    }
+
+    public void setSideEffcet(String sideEffect) {
+        this.sideEffect = sideEffect;
+    }
+
 }
