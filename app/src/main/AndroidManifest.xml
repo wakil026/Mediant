@@ -10,14 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ReminderDetailsActivity"></activity>
-        <activity android:name=".ReminderDetails" />
         <activity android:name=".ReminderActivity" />
-        <activity android:name=".UpdateMedicineActivity">
+        <activity android:name=".UpdateMedicineActivity"/>
         <activity android:name=".MedicineRemoveListActivity" />
         <activity android:name=".MedicineDetailsActivity" />
         <activity android:name=".AmbulanceRemoveListActivity" />
         <activity android:name=".RemoveAmbulanceActivity" />
-        <activity android:name=".RemoveAmulanceActivity" />
         <activity android:name=".RemoveMedicineActivity" />
         <activity android:name=".MedicineSearchListActivity" />
         <activity android:name=".AmbulanceSearchListActivity" />
