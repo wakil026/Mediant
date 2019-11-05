@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".ReminderDetailsActivity">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/nameId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:hint="Medicine Name"/>
+
+    <EditText
+        android:id="@+id/descriptionId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nameId"
+        android:textSize="15dp"
+        android:hint="Description"/>
+
+    <TextView
+        android:id="@+id/timeTextID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/descriptionId"
+        android:layout_marginTop="20dp"
+        android:text="Select Time"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/addTimeButtonID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timeTextID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Add"/>
+
+    <ListView
+        android:id="@+id/listViewID"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/addTimeButtonID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark"/>
+
+    <Button
+        android:id="@+id/saveButtonID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listViewID"
+        android:layout_centerHorizontal="true"
+        android:text="Save"
+        android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
