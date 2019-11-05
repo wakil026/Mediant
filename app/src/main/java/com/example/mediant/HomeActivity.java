@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void show_mymedicine(){
-        Intent intent = new Intent(this, ReminderActivity.class);
+        Intent intent = new Intent(this, MyMedicineActivity.class);
         startActivity(intent);
     }
 
