@@ -24,7 +24,7 @@
         android:layout_height="115dp"
         android:padding="20dp"
         android:layout_toRightOf="@+id/addmedicine_button"
-        android:text="Remove Medicine"
+        android:text="Update/Remove Medicine"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
@@ -43,7 +43,7 @@
         android:layout_width="155dp"
         android:layout_height="115dp"
         android:padding="10dp"
-        android:text="Remove Ambulance"
+        android:text="Update/Remove Ambulance"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button

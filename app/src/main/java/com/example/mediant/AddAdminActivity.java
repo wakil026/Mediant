@@ -26,7 +26,7 @@ public class AddAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_admin);
-
+        getSupportActionBar().setTitle("Add Admin");
         newAdminEmail = (EditText) findViewById(R.id.newAdminEmailId);
         addButton = (Button) findViewById(R.id.addButtonId);
 

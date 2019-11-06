@@ -56,7 +56,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-
+        getSupportActionBar().setTitle("Update Profile");
         usernameText = findViewById(R.id.updateUsernameId);
         ageText = findViewById(R.id.updateAgeId);
         bloodGroupText = findViewById(R.id.updateBloodGroupId);

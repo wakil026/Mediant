@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getSupportActionBar().setTitle("Home");
         allmedicine = findViewById(R.id.button_allmedicine);
         mymedicine = findViewById(R.id.button_mymedicine);
         findAmbulance = findViewById(R.id.button_findambu);

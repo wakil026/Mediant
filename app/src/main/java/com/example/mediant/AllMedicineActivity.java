@@ -29,6 +29,7 @@ public class AllMedicineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_medicine);
+        getSupportActionBar().setTitle("All Medicines");
         mrecyclerView = findViewById(R.id.recycler_view);
         mrecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);

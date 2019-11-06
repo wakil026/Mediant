@@ -29,6 +29,7 @@ public class AllAmbulanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_ambulance);
+        getSupportActionBar().setTitle("All Ambulance");
         mrecyclerView = findViewById(R.id.recycler_view);
         mrecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);

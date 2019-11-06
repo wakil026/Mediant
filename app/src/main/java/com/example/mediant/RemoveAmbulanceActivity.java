@@ -17,6 +17,7 @@ public class RemoveAmbulanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_ambulance);
+        getSupportActionBar().setTitle("Remove Ambulance");
         ambulanceName = findViewById(R.id.editTextAmbulanceName);
         ambulanceNameEnter = findViewById(R.id.button_enter_ambulance);
 
