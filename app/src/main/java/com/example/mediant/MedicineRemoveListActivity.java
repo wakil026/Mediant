@@ -30,6 +30,7 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
     String genericName;
     String type;
     String contains;
+    String docname;
     int x=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,12 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
     }
 
     public void updateData(){
-        String docname = ""+brandName+genericName+type+contains;
+        docname = ""+brandName+genericName+type+contains;
         docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
         Intent intent = new Intent(getApplicationContext(),UpdateMedicineActivity.class);
         intent.putExtra("docname",docname);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivityForResult(intent,420);
+        startActivityForResult(intent,1);
 
     }
 
@@ -100,15 +101,17 @@ public class MedicineRemoveListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case 420:
+            case 1:
                 if(resultCode == RESULT_OK){
-                    deleteMedicineData();
+                    String updatedDocname = data.getData().toString();
+                    if(!updatedDocname.equals(docname))
+                        deleteMedicineData();
                 }
         }
     }
 
     public void deleteMedicineData(){
-        String docname = ""+brandName+genericName+type+contains;
+        docname = ""+brandName+genericName+type+contains;
         docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
         //Toast.makeText(getApplicationContext(),docname,Toast.LENGTH_LONG).show();
         firebaseFirestore.collection("Medicine Information").document(docname)

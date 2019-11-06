@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -146,12 +147,14 @@ public class UpdateMedicineActivity extends AppCompatActivity {
         MedicineInfo medicineInfo = new MedicineInfo(brand,generic,contains,type,company,indications,sideEffects);
         String docname = ""+brand+generic+type+contains;
         docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
+        final String updatedDocname = docname;
         collectionReference.document(""+docname).set(medicineInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "Successfully updated the medicine", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
+                        intent.setData(Uri.parse(updatedDocname));
                         setResult(RESULT_OK,intent);
                         finish();
 
