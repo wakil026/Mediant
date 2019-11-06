@@ -50,6 +50,24 @@ public class AddAmbulanceActivity extends AppCompatActivity {
         String name = ambulanceName.getText().toString().trim().toUpperCase();
         String number = contactNumber.getText().toString().trim();
         String service_city = city.getText().toString().trim().toUpperCase();
+
+        if(name.isEmpty()){
+            ambulanceName.setError("This field cannot be empty");
+            ambulanceName.requestFocus();
+            return;
+        }
+        if(number.isEmpty()){
+            contactNumber.setError("This field cannot be empty");
+            contactNumber.requestFocus();
+            return;
+        }
+        if(service_city.isEmpty()){
+            city.setError("This field cannot be empty");
+            city.requestFocus();
+            return;
+        }
+
+
         Map<String, Object> ambulance_data = new HashMap<>();
         ambulance_data.put(key_ambulance_name,name);
         ambulance_data.put(key_ambulance_number,number);

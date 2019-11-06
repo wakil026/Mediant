@@ -1,6 +1,7 @@
 package com.example.mediant;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,9 @@ public class AmbulanceRemoveListActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     CustomAdapterforRemoveAmbulance adapter;
     int x=0;
+    String ambulanceName;
+    String serviceArea;
+    String docname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +76,34 @@ public class AmbulanceRemoveListActivity extends AppCompatActivity {
                 });
 
     }
-    public void deleteAmbulanceData(int index){
+    public void getData(int index){
         firebaseFirestore = FirebaseFirestore.getInstance();
-        String ambulanceName = modelList.get(index).getName();
-        String serviceArea = modelList.get(index).getServiceArea();
-        String docname = ""+ambulanceName+serviceArea;
+        ambulanceName = modelList.get(index).getName();
+        serviceArea = modelList.get(index).getServiceArea();
+    }
+    public void updateAmbulanceData(){
+        docname = ""+ambulanceName+serviceArea;
+        docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
+        Intent intent = new Intent(getApplicationContext(),UpdateAmbulanceActivity.class);
+        intent.putExtra("docname",docname);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent,2);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 2:
+                if(resultCode == RESULT_OK){
+                    String updatedDocname = data.getData().toString();
+                    if(!updatedDocname.equals(docname))
+                        deleteAmbulanceData();
+                }
+        }
+    }
+    public void deleteAmbulanceData(){
+
+        docname = ""+ambulanceName+serviceArea;
         docname = docname.replaceAll("[^A-Za-z0-9]","").trim().toLowerCase();
         firebaseFirestore.collection("Ambulance").document(docname)
                 .delete()
