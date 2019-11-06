@@ -15,6 +15,7 @@ public class RemoveMedicineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_medicine);
+        getSupportActionBar().setTitle("Remove Medicine");
         medicineName = findViewById(R.id.editTextMedicineName);
         medicineNameEnter = findViewById(R.id.button_enter_medicine);
 

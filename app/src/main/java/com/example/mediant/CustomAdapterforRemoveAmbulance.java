@@ -42,12 +42,16 @@ public class CustomAdapterforRemoveAmbulance extends RecyclerView.Adapter<ViewHo
             @Override
             public void onItemLongClick(View view, final int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(listActivity);
-                String options[] ={"Delete"};
+                String options[] ={"Update","Delete"};
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        listActivity.getData(position);
                         if(i==0){
-                            listActivity.deleteAmbulanceData(position);
+                            listActivity.updateAmbulanceData();
+                        }
+                        if(i==1){
+                            listActivity.deleteAmbulanceData();
                         }
 
                     }

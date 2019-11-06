@@ -32,7 +32,7 @@ public class AddAmbulanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ambulance);
-
+        getSupportActionBar().setTitle("Add Ambulance");
 
         enterAmbulanceinfo = findViewById(R.id.button_enter);
         ambulanceName = findViewById(R.id.editText_ambuName);
@@ -50,6 +50,24 @@ public class AddAmbulanceActivity extends AppCompatActivity {
         String name = ambulanceName.getText().toString().trim().toUpperCase();
         String number = contactNumber.getText().toString().trim();
         String service_city = city.getText().toString().trim().toUpperCase();
+
+        if(name.isEmpty()){
+            ambulanceName.setError("This field cannot be empty");
+            ambulanceName.requestFocus();
+            return;
+        }
+        if(number.isEmpty()){
+            contactNumber.setError("This field cannot be empty");
+            contactNumber.requestFocus();
+            return;
+        }
+        if(service_city.isEmpty()){
+            city.setError("This field cannot be empty");
+            city.requestFocus();
+            return;
+        }
+
+
         Map<String, Object> ambulance_data = new HashMap<>();
         ambulance_data.put(key_ambulance_name,name);
         ambulance_data.put(key_ambulance_number,number);
@@ -62,6 +80,7 @@ public class AddAmbulanceActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(),"Ambulance information is added",Toast.LENGTH_LONG).show();
+                        clearFields();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -71,5 +90,10 @@ public class AddAmbulanceActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void  clearFields(){
+        ambulanceName.setText("");
+        contactNumber.setText("");
+        city.setText("");
     }
 }
