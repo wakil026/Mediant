@@ -65,7 +65,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         timeHour = hourOfDay;
                         timeMinute = minute;
-                        timeTextView.setText(getTimeInAmPmFormat());
+                        timeTextView.setText(getTimeInAmPmFormat(timeHour * 60 + timeMinute));
                     }
                 }, currentHour, currentMinute, false);
 
@@ -77,8 +77,9 @@ public class ReminderDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!timeTextView.getText().toString().equals("Select Time")) {
-                    timeListInMinute.add(timeHour * 60 + timeMinute);
-                    timeList.add(getTimeInAmPmFormat());
+                    int timeInMinute = timeHour * 60 + timeMinute;
+                    timeListInMinute.add(timeInMinute);
+                    timeList.add(getTimeInAmPmFormat(timeInMinute));
                     listAdapter.notifyDataSetChanged();
                     timeTextView.setText("Select Time");
                 }
@@ -114,9 +115,9 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                         SharedPreferences preferences = getSharedPreferences("MyPreference", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         int id = preferences.getInt(position + "Id", -1);
+                        int listSize = preferences.getInt("ListSize", 0);
                         if (id == -1) {
                             int maxId = 0;
-                            int listSize = preferences.getInt("ListSize", 0);
                             for (int i = 0; i < listSize; ++i) {
                                 int curr = preferences.getInt(i + "Id", -1);
                                 if (curr > maxId) {
@@ -129,6 +130,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                         }
                         editor.putString(id + "Name", name);
                         editor.putString(id + "Description", description);
+
                         int oldtimes = preferences.getInt(id + "Times", 0);
                         for (int i = 0; i < oldtimes; ++i) {
                             int requestCode = preferences.getInt(id + "RequestCode" + i, 0);
@@ -138,7 +140,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                             editor.remove(id + "RequestCode" + i);
                             editor.remove(id + "Time" + i);
                         }
-                        editor.apply();
+
                         int newTimes = timeListInMinute.size();
                         editor.putInt(id + "Times", newTimes);
                         for (int i = 0; i < newTimes; ++i) {
@@ -148,15 +150,16 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                             editor.putInt(id + "Time" + i, time);
                             Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
                             intent.putExtra("NotificationID", requestCode);
-                            intent.putExtra("title", "Mediant");
-                            intent.putExtra("message", name);
+                            intent.putExtra("title", name);
+                            intent.putExtra("message", description);
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, 0);
                             Calendar c = Calendar.getInstance();
                             c.set(Calendar.HOUR_OF_DAY, time / 60);
                             c.set(Calendar.MINUTE, time % 60);
                             c.set(Calendar.SECOND, 0);
-                            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
                         }
+
                         editor.apply();
                         Toast.makeText(ReminderDetailsActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
@@ -168,11 +171,16 @@ public class ReminderDetailsActivity extends AppCompatActivity {
 
     }
 
-    public String getTimeInAmPmFormat() {
-        if (timeHour == 0) return 12 + ":" + timeMinute + "AM";
-        else if (timeHour < 12) return timeHour + ":" + timeMinute + " AM";
-        else if (timeHour == 12) return 12 + ":" + timeMinute + "PM";
-        else return timeHour - 12 + ":" + timeMinute + "PM";
+    public String getTimeInAmPmFormat(int timeInMinute) {
+        int hour = timeInMinute / 60;
+        int minute = timeInMinute % 60;
+        String sMinute;
+        if (minute < 10) sMinute = "0" + minute;
+        else sMinute = "" + minute;
+        if (hour == 0) return 12 + ":" + sMinute + " AM";
+        else if (hour < 12) return hour + ":" + sMinute + " AM";
+        else if (hour == 12) return 12 + ":" + sMinute + " PM";
+        else return hour - 12 + ":" + sMinute + " PM";
     }
 
     public void loadData() {
@@ -187,10 +195,8 @@ public class ReminderDetailsActivity extends AppCompatActivity {
             int times = preferences.getInt(id + "Times", 0);
             for (int i = 0; i < times; ++i) {
                 int minutes = preferences.getInt(id + "Time" + i, 0);
-                int hour = minutes / 60;
-                int minute = minutes % 60;
-                if (hour < 12) timeList.add(hour + ":" + minute + " AM");
-                else timeList.add(hour + ":" + minute + "PM");
+                timeListInMinute.add(minutes);
+                timeList.add(getTimeInAmPmFormat(minutes));
             }
             listAdapter.notifyDataSetChanged();
         }
