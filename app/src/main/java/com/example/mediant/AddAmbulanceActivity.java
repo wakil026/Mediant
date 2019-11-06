@@ -80,6 +80,7 @@ public class AddAmbulanceActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(),"Ambulance information is added",Toast.LENGTH_LONG).show();
+                        clearFields();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -89,5 +90,10 @@ public class AddAmbulanceActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void  clearFields(){
+        ambulanceName.setText("");
+        contactNumber.setText("");
+        city.setText("");
     }
 }
