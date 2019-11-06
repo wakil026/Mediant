@@ -49,7 +49,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-
+        getSupportActionBar().setTitle("Profile");
         profieEmailTextView = findViewById(R.id.emailId);
         profieUsernameTextView = findViewById(R.id.usernameId);
         profieAgeTextView = findViewById(R.id.ageId);

@@ -32,7 +32,7 @@ public class AddAmbulanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ambulance);
-
+        getSupportActionBar().setTitle("Add Ambulance");
 
         enterAmbulanceinfo = findViewById(R.id.button_enter);
         ambulanceName = findViewById(R.id.editText_ambuName);

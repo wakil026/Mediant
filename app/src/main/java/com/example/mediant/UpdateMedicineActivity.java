@@ -48,6 +48,7 @@ public class UpdateMedicineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_medicine);
+        getSupportActionBar().setTitle("Update Medicine");
         firebaseFirestore = FirebaseFirestore.getInstance();
         collectionReference =firebaseFirestore.collection("Medicine Information");
 

@@ -47,7 +47,7 @@ public class UpdateAmbulanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_ambulance);
         firebaseFirestore = FirebaseFirestore.getInstance();
         collectionReference =firebaseFirestore.collection("Ambulance");
-
+        getSupportActionBar().setTitle("Update Ambulance Data");
         Intent intent = getIntent();
         docname = intent.getStringExtra("docname");
 

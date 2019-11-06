@@ -55,7 +55,7 @@ public class UpdateEmailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_email);
-
+        getSupportActionBar().setTitle("Update Email");
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 

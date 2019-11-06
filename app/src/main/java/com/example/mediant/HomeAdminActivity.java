@@ -20,7 +20,7 @@ public class HomeAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
-
+        getSupportActionBar().setTitle("Admin Home");
         addMedicine = (Button) findViewById(R.id.addmedicine_button);
         removeMedicine = (Button) findViewById(R.id.removemedicine_button);
         addAmbulance = (Button) findViewById(R.id.Addambulance_button);

@@ -26,7 +26,7 @@ public class RemoveAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_admin);
-
+        getSupportActionBar().setTitle("Remove Admin");
         removeAdminEmail = (EditText) findViewById(R.id.removeAdminEmailId);
         removeButton = (Button) findViewById(R.id.removeButtonId);
 

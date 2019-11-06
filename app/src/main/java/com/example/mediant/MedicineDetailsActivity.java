@@ -32,5 +32,6 @@ public class MedicineDetailsActivity extends AppCompatActivity {
         brandName.setText(bundle.getString("brandName"));
         indications.setText(bundle.getString("indication"));
         sideEffect.setText(bundle.getString("sideEffect"));
+        getSupportActionBar().setTitle(bundle.getString("brandName"));
     }
 }
