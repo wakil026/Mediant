@@ -81,7 +81,6 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                 userLogin();
                 break;
             case  R.id.signUpTextViewId:
-                finish();
                 Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
