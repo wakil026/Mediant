@@ -18,4 +18,5 @@
     <style name="CustomEditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/edit_text_default</item>
     </style>
+
 </resources>
