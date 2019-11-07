@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
@@ -7,6 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logo4" />
 
     <EditText
         android:layout_marginTop="20dp"
@@ -34,13 +40,14 @@
         android:text="@string/sign_in" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/signUpForgotPasswordId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Forgot Password?" />
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/signUpTextViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,5 +59,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
 
 </LinearLayout>
