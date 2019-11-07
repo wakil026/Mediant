@@ -20,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/email_pic"
         android:inputType="textEmailAddress"
         android:hint="@string/email" />
 
@@ -29,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:drawableStart="@drawable/password_pic"
+        android:drawablePadding="10dp"
         android:inputType="textPassword"
         android:hint="@string/password" />
 
