@@ -25,8 +25,8 @@ public class RemoveMedicineActivity extends AppCompatActivity {
                 String inputText = medicineName.getText().toString().toUpperCase().trim();
                 // Toast.makeText(getApplicationContext(),inputText,Toast.LENGTH_LONG).show();
                 if(inputText.isEmpty()){
-                    medicineNameEnter.setError("Enter the Medicine name");
-                    medicineNameEnter.requestFocus();
+                    medicineName.setError("Enter the Medicine name");
+                    medicineName.requestFocus();
                     return;
                 }
                 else {
