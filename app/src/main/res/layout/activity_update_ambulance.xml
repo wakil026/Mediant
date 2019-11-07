@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="20dp"
     tools:context=".UpdateAmbulanceActivity">
-
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:id="@+id/updateAmbulanceNameId"
-        android:paddingTop="29dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -23,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:paddingTop="20dp"
         android:hint="Contact Number"
+        android:layout_marginTop="10dp"
         android:inputType="numberDecimal"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -33,16 +35,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:paddingTop="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Service Area"
         android:inputType="textPersonName"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/ambulanceUpdateButtondId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
