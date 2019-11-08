@@ -53,7 +53,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        this.setTitle("Sign In");
+        getSupportActionBar().hide();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -81,7 +81,6 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                 userLogin();
                 break;
             case  R.id.signUpTextViewId:
-                finish();
                 Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

@@ -1,8 +1,10 @@
 package com.example.mediant;
 
 //import android.app.ListActivity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +40,26 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
+            public void onItemLongClick(View view,final int position) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(listActivity);
+                builder.setTitle("Warning");
+                builder.setMessage("Are you sure to call this ambulance?");
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                builder.setPositiveButton("Make Call", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        listActivity.getPhoneNumber(position);
+                        listActivity.makeCall();
 
+                    }
+                });
+                builder.create()
+                        .show();
             }
         });
         return viewHolder;

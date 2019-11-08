@@ -39,7 +39,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medicine);
         setTitle("Medicine Information");
-
+        getSupportActionBar().setTitle("Add Medicine");
         collectionReference = database.collection("Medicine Information");
         brandNameEditText = findViewById(R.id.BrandNameEditTextId);
         genericEditText = findViewById(R.id.GenericEditTextId);

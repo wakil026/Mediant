@@ -30,7 +30,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_password);
-
+        getSupportActionBar().setTitle("Update Password");
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 

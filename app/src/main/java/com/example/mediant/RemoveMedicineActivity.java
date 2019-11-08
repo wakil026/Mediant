@@ -15,6 +15,7 @@ public class RemoveMedicineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_medicine);
+        getSupportActionBar().setTitle("Remove Medicine");
         medicineName = findViewById(R.id.editTextMedicineName);
         medicineNameEnter = findViewById(R.id.button_enter_medicine);
 
@@ -24,8 +25,8 @@ public class RemoveMedicineActivity extends AppCompatActivity {
                 String inputText = medicineName.getText().toString().toUpperCase().trim();
                 // Toast.makeText(getApplicationContext(),inputText,Toast.LENGTH_LONG).show();
                 if(inputText.isEmpty()){
-                    medicineNameEnter.setError("Enter the Medicine name");
-                    medicineNameEnter.requestFocus();
+                    medicineName.setError("Enter the Medicine name");
+                    medicineName.requestFocus();
                     return;
                 }
                 else {

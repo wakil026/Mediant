@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReminderDetailsActivity"></activity>
+        <activity android:name=".UpdateAmbulanceActivity"></activity>
+        <activity android:name=".ReminderDetailsActivity" />
         <activity android:name=".ReminderActivity" />
-        <activity android:name=".UpdateMedicineActivity"/>
+        <activity android:name=".UpdateMedicineActivity" />
         <activity android:name=".MedicineRemoveListActivity" />
         <activity android:name=".MedicineDetailsActivity" />
         <activity android:name=".AmbulanceRemoveListActivity" />
@@ -44,7 +45,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".AlertReceiver"/>
+
+        <receiver android:name=".AlertReceiver" />
     </application>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>
