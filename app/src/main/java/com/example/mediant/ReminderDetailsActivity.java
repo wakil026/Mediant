@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,7 +29,7 @@ import java.util.Calendar;
 
 public class ReminderDetailsActivity extends AppCompatActivity {
 
-    private static final String CHANNEL_ID = "channel1";
+    private SharedPreferences preferences;
     private EditText nameEditText;
     private EditText descriptionEditText;
     private TextView timeTextView;
@@ -111,8 +112,6 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                         Toast.makeText(ReminderDetailsActivity.this, "Select at least 1 time", Toast.LENGTH_SHORT).show();
                     }
                     else{
-
-                        SharedPreferences preferences = getSharedPreferences("MyPreference", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         int id = preferences.getInt(position + "Id", -1);
                         int listSize = preferences.getInt("ListSize", 0);
@@ -128,6 +127,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                             editor.putInt(position + "Id", id);
                             editor.putInt("ListSize", listSize + 1);
                         }
+
                         editor.putString(id + "Name", name);
                         editor.putString(id + "Description", description);
 
@@ -137,6 +137,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                             Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, 0);
                             alarmManager.cancel(pendingIntent);
+                            pendingIntent.cancel();
                             editor.remove(id + "RequestCode" + i);
                             editor.remove(id + "Time" + i);
                         }
@@ -149,15 +150,19 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                             int time = timeListInMinute.get(i);
                             editor.putInt(id + "Time" + i, time);
                             Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
-                            intent.putExtra("NotificationID", requestCode);
-                            intent.putExtra("title", name);
-                            intent.putExtra("message", description);
+                            intent.putExtra("NotificationId", requestCode);
+                            intent.putExtra("Title", name);
+                            intent.putExtra("Message", description);
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, 0);
                             Calendar c = Calendar.getInstance();
                             c.set(Calendar.HOUR_OF_DAY, time / 60);
                             c.set(Calendar.MINUTE, time % 60);
                             c.set(Calendar.SECOND, 0);
+                            if (c.before(Calendar.getInstance())) {
+                                c.add(Calendar.DATE, 1);
+                            }
                             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                            //alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);                                             // for testing purposes
                         }
 
                         editor.apply();
@@ -184,7 +189,6 @@ public class ReminderDetailsActivity extends AppCompatActivity {
     }
 
     public void loadData() {
-        SharedPreferences preferences = getSharedPreferences("MyPreference", MODE_PRIVATE);
         if (position == preferences.getInt("ListSize", 0)) {
             return;
         }
@@ -203,6 +207,8 @@ public class ReminderDetailsActivity extends AppCompatActivity {
     }
 
     public void initialize() {
+
+        preferences = getSharedPreferences("MyPreference", MODE_PRIVATE);
 
         position = getIntent().getIntExtra("position", 0);
 
