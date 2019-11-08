@@ -135,7 +135,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                         for (int i = 0; i < oldtimes; ++i) {
                             int requestCode = preferences.getInt(id + "RequestCode" + i, 0);
                             Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, 0);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             alarmManager.cancel(pendingIntent);
                             pendingIntent.cancel();
                             editor.remove(id + "RequestCode" + i);
@@ -153,7 +153,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                             intent.putExtra("NotificationId", requestCode);
                             intent.putExtra("Title", name);
                             intent.putExtra("Message", description);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, 0);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             Calendar c = Calendar.getInstance();
                             c.set(Calendar.HOUR_OF_DAY, time / 60);
                             c.set(Calendar.MINUTE, time % 60);
