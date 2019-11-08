@@ -11,22 +11,22 @@ import androidx.core.app.NotificationManagerCompat;
 
 public class AlertReceiver extends BroadcastReceiver {
 
-    private int NOTIFICATION_ID;
+    private int notificationId;
     private String message;
     private String title;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        NOTIFICATION_ID = intent.getIntExtra("notificationID", 0);
-        message = intent.getStringExtra("message");
-        title = intent.getStringExtra("title");
+        notificationId = intent.getIntExtra("NotificationId", 0);
+        title = intent.getStringExtra("Title");
+        message = intent.getStringExtra("Message");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "Mediant")
                 .setSmallIcon(R.drawable.ic_alarm_icon)
                 .setContentTitle(title)
                 .setContentText(message);
 
-        NotificationManagerCompat.from(context).notify(1, builder.build());
+        NotificationManagerCompat.from(context).notify(notificationId, builder.build());
 
 
     }

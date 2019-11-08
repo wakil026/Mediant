@@ -53,11 +53,9 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 startActivityForResult(intent, 1);
             }
         });
-
     }
 
     public void initializeRecyclerView() {
-
         reminderList = new ArrayList<>();
         recyclerView = findViewById(R.id.remindersRecyclerId);
         recyclerView.setHasFixedSize(true);
@@ -74,38 +72,30 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         int size = preferences.getInt("ListSize", 0);
         for (int i = 0; i < size; ++i) {
             int id = preferences.getInt(i + "Id", 0);
-            String name = preferences.getString(id + "Name", null);
-            String description = preferences.getString(id + "Description", null);
+            String name = preferences.getString(id + "Name", "");
+            String description = preferences.getString(id + "Description", "");
             reminderList.add(new ReminderItem(name, description));
         }
         adapter.notifyDataSetChanged();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_CANCELED) {
-
             refreshList();
         }
     }
 
     @Override
     public void onClick(int position) {
-        //Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(ReminderActivity.this, ReminderDetailsActivity.class);
         intent.putExtra("position", position);
         startActivityForResult(intent, 1);
-
     }
 
     @Override
     public void onLongClick(final int position) {
-
-        // code need to be done
-
         new AlertDialog.Builder(this)
                 .setTitle("Wait")
                 .setMessage("Delete Reminder?")
@@ -121,19 +111,15 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
                     }
                 }).show();
-
-
     }
 
     public void help(int position) {
-
-
         reminderList.remove(position);
         adapter.notifyDataSetChanged();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         SharedPreferences preferences = getSharedPreferences("MyPreference", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        int id = preferences.getInt(position + "Id", -1);
+        int id = preferences.getInt(position + "Id", -1);  // it has to exist so -1 can't come
         editor.remove(id + "Name");
         editor.remove(id + "Description");
         int times = preferences.getInt(id + "Times", 0);
@@ -142,6 +128,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             Intent intent = new Intent(ReminderActivity.this, AlertReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderActivity.this, requestCode, intent, 0);
             alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
             editor.remove(id + "RequestCode" + i);
             editor.remove(id + "Time" + i);
         }
@@ -153,7 +140,6 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         editor.putInt("ListSize", listSize - 1);
         editor.apply();
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-
     }
 
     public void createNotificationChannel() {
