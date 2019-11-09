@@ -47,8 +47,14 @@
         </activity>
 
         <receiver android:name=".AlertReceiver" />
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
     </application>
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>

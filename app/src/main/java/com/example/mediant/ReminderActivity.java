@@ -126,7 +126,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         for (int i = 0; i < times; ++i) {
             int requestCode = preferences.getInt(id + "RequestCode" + i, 0);
             Intent intent = new Intent(ReminderActivity.this, AlertReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderActivity.this, requestCode, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.cancel(pendingIntent);
             pendingIntent.cancel();
             editor.remove(id + "RequestCode" + i);
