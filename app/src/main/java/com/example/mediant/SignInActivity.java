@@ -125,6 +125,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
                     checkUsertype(email);
                 }
                 else{
+                    signInProgressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(), "Error : "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

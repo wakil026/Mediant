@@ -4,98 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="40dp"
+    android:padding="20dp"
     tools:context=".UpdateProfileActivity">
     <LinearLayout
-        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <TextView
-        android:layout_marginStart="20dp"
         android:paddingTop="40dp"
-        android:layout_marginEnd="20dp"
         android:id="@+id/usernameTextViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Username" />
 
     <EditText
-        android:layout_marginStart="20dp"
         android:id="@+id/updateUsernameId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginEnd="20dp"
         android:inputType="textPersonName"
         android:hint="Enter new username" />
 
     <TextView
-        android:layout_marginStart="20dp"
         android:paddingTop="20dp"
         android:id="@+id/ageTextViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:text="Age" />
 
     <EditText
-        android:layout_marginStart="20dp"
         android:id="@+id/updateAgeId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginEnd="20dp"
         android:inputType="text|numberDecimal"
         android:hint="Enter your age" />
 
     <TextView
-        android:layout_marginStart="20dp"
         android:paddingTop="20dp"
         android:id="@+id/bloodGroupTextViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:text="Blood Group" />
 
     <EditText
-        android:layout_marginStart="20dp"
         android:id="@+id/updateBloodGroupId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginEnd="20dp"
         android:hint="Enter your blood group" />
 
     <TextView
-        android:layout_marginStart="20dp"
         android:paddingTop="20dp"
         android:id="@+id/cityTextViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:text="City" />
 
     <EditText
-        android:layout_marginStart="20dp"
         android:id="@+id/updateCityId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:layout_marginEnd="20dp"
         android:hint="Enter your city" />
 
 
     <Button
-        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/updateButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_margin="20dp"
         android:text="Update" />
 
     <TextView
