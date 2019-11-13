@@ -118,14 +118,14 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             int id = preferences.getInt(position + "Id", -1);
             int times = preferences.getInt(id + "Times", 0);
             String name = preferences.getString(id + "Name", "");
-            String description = preferences.getString(id + "Details", "");
+            String details = preferences.getString(id + "Details", "");
             for (int i = 0; i < times; ++i) {
                 int time = preferences.getInt(id + "Time" + i, -1);
                 int requestCode = preferences.getInt(id + "RequestCode" + i, -1);
                 Intent intent = new Intent(this, AlertReceiver.class);
                 intent.putExtra("NotificationId", requestCode);
                 intent.putExtra("Title", name);
-                intent.putExtra("Message", description);
+                intent.putExtra("Message", details);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 Calendar c = Calendar.getInstance();
                 c.set(Calendar.HOUR_OF_DAY, time / 60);

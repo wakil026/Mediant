@@ -28,7 +28,7 @@ public class BootReceiver extends BroadcastReceiver {
             for (int i = 0; i < size; ++i) {
                 int id = preferences.getInt(i + "Id", -1);
                 String name = preferences.getString(id + "Name", "");
-                String description = preferences.getString(id + "Description", "");
+                String description = preferences.getString(id + "Details", "");
                 int times = preferences.getInt(id + "Times", 0);
                 for (int j = 0; j < times; ++j) {
                     int time = preferences.getInt(id + "Time" + j, 0);
