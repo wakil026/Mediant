@@ -23,9 +23,11 @@
             android:id="@+id/reminderNameId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="line1"
+            android:text="Line1"
             android:textSize="20sp"
+            android:ellipsize="end"
             android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/switch1Id"
             android:layout_toEndOf="@+id/reminderImageId"
             android:layout_marginLeft="10dp"/>
 
@@ -33,15 +35,21 @@
             android:id="@+id/reminderDescriptionId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lines="1"
-            android:layout_marginRight="10dp"
             android:ellipsize="end"
-            android:text=""
+            android:text="Line2"
             android:textSize="15sp"
             android:layout_below="@+id/reminderNameId"
             android:layout_toEndOf="@+id/reminderImageId"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"/>
 
+        <Switch
+            android:id="@+id/switch1Id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp" />
 
     </RelativeLayout>
 

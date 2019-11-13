@@ -23,20 +23,20 @@
         android:hint="Medicine Name"/>
 
     <EditText
-        android:id="@+id/descriptionId"
+        android:id="@+id/detailsId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/nameId"
         android:textSize="15dp"
-        android:hint="Description"/>
+        android:hint="Details"/>
 
     <TextView
         android:id="@+id/timeTextID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/descriptionId"
+        android:layout_below="@+id/detailsId"
         android:layout_marginTop="20dp"
         android:text="Select Time"
         android:textSize="30sp" />
