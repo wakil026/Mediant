@@ -29,9 +29,11 @@ import java.util.Calendar;
 
 public class ReminderDetailsActivity extends AppCompatActivity {
 
+    private final String TAG = "ReminderDetailsActivity";
+    private String PREFERENCE;
     private SharedPreferences preferences;
     private EditText nameEditText;
-    private EditText descriptionEditText;
+    private EditText detailsEditText;
     private TextView timeTextView;
     private Button addBtn;
     private Button saveBtn;
@@ -50,7 +52,6 @@ public class ReminderDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_details);
-
         initialize();
         loadData();
 
@@ -103,72 +104,67 @@ public class ReminderDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = nameEditText.getText().toString();
-                String description = descriptionEditText.getText().toString();
+                String details = detailsEditText.getText().toString();
                 if (name.equals("")) {
                     Toast.makeText(ReminderDetailsActivity.this, "Name Can't Be Empty", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if (timeListInMinute.size() == 0) {
-                        Toast.makeText(ReminderDetailsActivity.this, "Select at least 1 time", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        SharedPreferences.Editor editor = preferences.edit();
-                        int id = preferences.getInt(position + "Id", -1);
-                        int listSize = preferences.getInt("ListSize", 0);
-                        if (id == -1) {
-                            int maxId = 0;
-                            for (int i = 0; i < listSize; ++i) {
-                                int curr = preferences.getInt(i + "Id", -1);
-                                if (curr > maxId) {
-                                    maxId = curr;
-                                }
+                    SharedPreferences.Editor editor = preferences.edit();
+                    int id = preferences.getInt(position + "Id", -1);
+                    int listSize = preferences.getInt("ListSize", 0);
+                    if (id == -1) {
+                        int maxId = 0;
+                        for (int i = 0; i < listSize; ++i) {
+                            int curr = preferences.getInt(i + "Id", -1);
+                            if (curr > maxId) {
+                                maxId = curr;
                             }
-                            id = maxId + 1;
-                            editor.putInt(position + "Id", id);
-                            editor.putInt("ListSize", listSize + 1);
                         }
-
-                        editor.putString(id + "Name", name);
-                        editor.putString(id + "Description", description);
-
-                        int oldtimes = preferences.getInt(id + "Times", 0);
-                        for (int i = 0; i < oldtimes; ++i) {
-                            int requestCode = preferences.getInt(id + "RequestCode" + i, 0);
-                            Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            alarmManager.cancel(pendingIntent);
-                            pendingIntent.cancel();
-                            editor.remove(id + "RequestCode" + i);
-                            editor.remove(id + "Time" + i);
-                        }
-
-                        int newTimes = timeListInMinute.size();
-                        editor.putInt(id + "Times", newTimes);
-                        for (int i = 0; i < newTimes; ++i) {
-                            int requestCode = id * 1000 + i;
-                            editor.putInt(id + "RequestCode" + i, requestCode);
-                            int time = timeListInMinute.get(i);
-                            editor.putInt(id + "Time" + i, time);
-                            Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
-                            intent.putExtra("NotificationId", requestCode);
-                            intent.putExtra("Title", name);
-                            intent.putExtra("Message", description);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            Calendar c = Calendar.getInstance();
-                            c.set(Calendar.HOUR_OF_DAY, time / 60);
-                            c.set(Calendar.MINUTE, time % 60);
-                            c.set(Calendar.SECOND, 0);
-                            if (c.before(Calendar.getInstance())) {
-                                c.add(Calendar.DATE, 1);
-                            }
-                            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-                            //alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);                                             // for testing purposes
-                        }
-
-                        editor.apply();
-                        Toast.makeText(ReminderDetailsActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-
+                        id = maxId + 1;
+                        editor.putInt(position + "Id", id);
+                        editor.putInt("ListSize", listSize + 1);
                     }
+                    editor.putString(id + "Name", name);
+                    editor.putString(id + "Details", details);
+
+                    int oldtimes = preferences.getInt(id + "Times", 0);
+                    for (int i = 0; i < oldtimes; ++i) {
+                        int requestCode = preferences.getInt(id + "RequestCode" + i, 0);
+                        Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmManager.cancel(pendingIntent);
+                        pendingIntent.cancel();
+                        editor.remove(id + "RequestCode" + i);
+                        editor.remove(id + "Time" + i);
+                    }
+
+                    int newTimes = timeListInMinute.size();
+                    editor.putInt(id + "Times", newTimes);
+                    for (int i = 0; i < newTimes; ++i) {
+                        int requestCode = id * 1000 + i;
+                        editor.putInt(id + "RequestCode" + i, requestCode);
+                        int time = timeListInMinute.get(i);
+                        editor.putInt(id + "Time" + i, time);
+                        Intent intent = new Intent(ReminderDetailsActivity.this, AlertReceiver.class);
+                        intent.putExtra("NotificationId", requestCode);
+                        intent.putExtra("Title", name);
+                        intent.putExtra("Message", details);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        Calendar c = Calendar.getInstance();
+                        c.set(Calendar.HOUR_OF_DAY, time / 60);
+                        c.set(Calendar.MINUTE, time % 60);
+                        c.set(Calendar.SECOND, 0);
+                        if (c.before(Calendar.getInstance())) {
+                            c.add(Calendar.DATE, 1);
+                        }
+                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);                                             // for testing purposes
+                    }
+                    editor.putBoolean(id + "Status", true);
+                    editor.apply();
+                    Toast.makeText(ReminderDetailsActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+
+
                 }
 
             }
@@ -195,7 +191,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
         else{
             int id = preferences.getInt(position + "Id", 0);
             nameEditText.setText(preferences.getString(id + "Name", ""));
-            descriptionEditText.setText(preferences.getString(id + "Description", ""));
+            detailsEditText.setText(preferences.getString(id + "Details", ""));
             int times = preferences.getInt(id + "Times", 0);
             for (int i = 0; i < times; ++i) {
                 int minutes = preferences.getInt(id + "Time" + i, 0);
@@ -207,20 +203,16 @@ public class ReminderDetailsActivity extends AppCompatActivity {
     }
 
     public void initialize() {
-
-        preferences = getSharedPreferences("MyPreference", MODE_PRIVATE);
-
-        position = getIntent().getIntExtra("position", 0);
-
+        PREFERENCE = getIntent().getStringExtra("PreferenceId");
+        preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
+        position = getIntent().getIntExtra("Position", 0);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
         nameEditText = findViewById(R.id.nameId);
-        descriptionEditText = findViewById(R.id.descriptionId);
+        detailsEditText = findViewById(R.id.detailsId);
         timeTextView = findViewById(R.id.timeTextID);
         addBtn = findViewById(R.id.addTimeButtonID);
         timeListView = findViewById(R.id.listViewID);
         saveBtn = findViewById(R.id.saveButtonID);
-
         listAdapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_list_item_1, timeList);
         timeListView.setAdapter(listAdapter);
