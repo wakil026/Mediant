@@ -4,50 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="10dp"
     tools:context=".HomeActivity">
     <LinearLayout
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/button_allmedicine"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_margin="5dp"
-        android:text="All Medicine"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button_searchMedicine"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_margin="5dp"
-        android:text="Find Medicine"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            <Button
+                android:id="@+id/button_allmedicine"
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/custom_button"
+                android:drawableTop="@drawable/medicine"
+                android:text="All Medicine"
+                android:textColor="#FFF"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <Button
-        android:id="@+id/button_mymedicine"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_margin="5dp"
-        android:text="My Medicine"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-    <Button
-        android:id="@+id/button_allAmbulance"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_margin="5dp"
-        android:text="All Ambulance"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-    <Button
-        android:id="@+id/button_findambu"
-        android:layout_width="284dp"
-        android:layout_height="60dp"
-        android:layout_margin="5dp"
-        android:text="Find Ambulance"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            <Button
+                android:id="@+id/button_searchMedicine"
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:background="@drawable/custom_button"
+                android:layout_margin="12dp"
+                android:drawableTop="@drawable/search_medicine"
+                android:text="Find Medicine"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_mymedicine"
 
+            android:drawableTop="@drawable/my_med"
+            android:layout_width="320dp"
+            android:layout_height="170dp"
+            android:textColor="#FFF"
+            android:background="@drawable/custom_button"
+            android:layout_margin="5dp"
+            android:text="My Medicine"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/button_allAmbulance"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:background="@drawable/custom_button"
+                android:drawableTop="@drawable/ambulance"
+                android:layout_margin="5dp"
+                android:textColor="#FFF"
+                android:text="All Ambulance"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Button
+                android:id="@+id/button_findambu"
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                android:background="@drawable/custom_button"
+                android:layout_margin="5dp"
+                android:textColor="#FFF"
+                android:drawableTop="@drawable/search_ambulance"
+                android:text="Find Ambulance"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

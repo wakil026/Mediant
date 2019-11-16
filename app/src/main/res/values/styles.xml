@@ -4,24 +4,28 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">#000</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="buttonStyle">@style/CustomButton</item>
         <item name="editTextStyle">@style/CustomEditText</item>
-        <item name="alertDialogTheme">@style/AlertDialogCustom</item>
+        <item name="android:background">#111111</item>
+        <item name="android:textColor">#FFF</item>
     </style>
-
     <style name="CustomButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/custom_button</item>
+        <item name="android:background">@drawable/custom_button2</item>
         <item name="android:textColor">#FFF</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="CustomEditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/edit_text_default</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:textColorHint">#A0A0A0</item>
     </style>
 
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">@color/colorPrimary</item>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">#f3f3f3</item>
+        <item name="android:textColorPrimary">#f3f3f3</item>
     </style>
 
 </resources>
