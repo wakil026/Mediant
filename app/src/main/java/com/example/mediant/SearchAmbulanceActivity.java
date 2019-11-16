@@ -20,6 +20,7 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_ambulance);
+        getSupportActionBar().setTitle("Search Ambulance");
 
         spinner = findViewById(R.id.spinner_seach_ambu);
         ambusearch = findViewById(R.id.id_search_ambu);
@@ -94,4 +95,6 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
         i.putExtras(bundle);
         startActivity(i);
     }
+
+
 }

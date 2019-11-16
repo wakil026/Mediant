@@ -14,7 +14,8 @@
         android:id="@+id/id_search_ambu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_searchambu" />
+        android:layout_below="@+id/textView_searchambu"
+        />
 
     <TextView
         android:id="@+id/textView_searchambu"
