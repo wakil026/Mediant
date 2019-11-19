@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -24,7 +25,7 @@ public class AlertReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_alarm_icon)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setAutoCancel(true);
 
         NotificationManagerCompat.from(context).notify(notificationId, builder.build());
 

@@ -3,6 +3,8 @@ package com.example.mediant;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,12 +25,20 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
         public TextView titleTextView;
         public TextView descriptionTextView;
+        public Switch aSwitch;
 
         public ReminderListViewHolder(@NonNull final View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.reminderNameId);
             descriptionTextView = itemView.findViewById(R.id.reminderDescriptionId);
+            aSwitch = itemView.findViewById(R.id.switch1Id);
 
+            aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    itemClickListener.onChecked(getAdapterPosition(), isChecked);
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -61,6 +71,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         ReminderItem currentItem = reminderList.get(position);
         holder.titleTextView.setText(currentItem.getName());
         holder.descriptionTextView.setText(currentItem.getDescription());
+        holder.aSwitch.setChecked(currentItem.getIsEnabled());
     }
 
     @Override
