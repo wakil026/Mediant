@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this,R.style.AlertDialogStyle);
         builder.setTitle("Warning");
         builder.setMessage("Do you want to quit Mediant?");
         builder.setCancelable(true);
