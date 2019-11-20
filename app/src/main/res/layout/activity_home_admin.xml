@@ -13,77 +13,77 @@
         android:layout_height="wrap_content">
     <Button
         android:id="@+id/addmedicine_button"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_button"
+        android:drawableTop="@drawable/add_medicine"
         android:padding="20dp"
         android:text="Add Medicine"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/removemedicine_button"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:padding="20dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/custom_button"
+        android:drawableTop="@drawable/remove_medicine"
+        android:padding="10dp"
         android:layout_toRightOf="@+id/addmedicine_button"
         android:text="Update/Remove Medicine"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/Addambulance_button"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:padding="10dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/custom_button"
+        android:drawableTop="@drawable/add_ambulance"
+        android:padding="20dp"
         android:layout_below="@+id/addmedicine_button"
         android:text="Add Ambulance"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/removeambulance_button"
         android:layout_toRightOf="@id/Addambulance_button"
         android:layout_below="@+id/removemedicine_button"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:padding="10dp"
+        android:layout_width="140dp"
+        android:background="@drawable/custom_button"
+        android:layout_height="140dp"
+        android:drawableTop="@drawable/remove_ambulance"
+        android:padding="15dp"
         android:text="Update/Remove Ambulance"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/addAdminButtonId"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:layout_below="@id/button_search_medicine"
-        android:padding="10dp"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:background="@drawable/custom_button"
+        android:drawableTop="@drawable/add_admin"
+        android:layout_below="@id/Addambulance_button"
+        android:padding="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:text="Add Admin" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/removeAdminButtonId"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:padding="10dp"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:padding="20dp"
+        android:drawableTop="@drawable/remove_admin"
+        android:background="@drawable/custom_button"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_below="@id/button_search_ambu"
+        android:layout_below="@id/Addambulance_button"
         android:layout_toRightOf="@+id/addAdminButtonId"
         android:text="Remove Admin" />
 
-    <Button
-        android:id="@+id/button_search_medicine"
-        android:layout_below="@+id/Addambulance_button"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:padding="10dp"
-        android:text="Search Medicine"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    <Button
-        android:id="@+id/button_search_ambu"
-        android:layout_below="@id/removeambulance_button"
-        android:layout_toRightOf="@+id/button_search_medicine"
-        android:layout_width="155dp"
-        android:layout_height="115dp"
-        android:padding="10dp"
-        android:text="Search Ambulance"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </RelativeLayout>
 </ScrollView>
