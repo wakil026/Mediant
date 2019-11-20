@@ -10,10 +10,13 @@
     android:layout_marginLeft="10dp">
 
     <RelativeLayout
+        android:background="#777"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <TextView
+            android:background="#777"
+            android:textColor="@color/black"
             android:id="@+id/timeInListId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,6 +26,8 @@
             android:layout_centerVertical="true"/>
 
         <ImageView
+            android:textColor="@color/black"
+            android:background="#777"
             android:id="@+id/deleteTimeId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

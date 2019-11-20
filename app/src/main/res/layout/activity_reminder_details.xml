@@ -46,7 +46,7 @@
         android:layout_height="200dp"
         android:layout_below="@+id/addTimeButtonId"
         android:layout_marginTop="10dp"
-        android:background="#f2f4f2"/>
+        />
 
     <Button
         android:id="@+id/saveButtonId"
