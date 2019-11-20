@@ -1,6 +1,8 @@
 package com.example.mediant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -27,23 +29,22 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ReminderDetailsActivity extends AppCompatActivity {
+public class ReminderDetailsActivity extends AppCompatActivity implements ItemClickListener{
 
     private final String TAG = "ReminderDetailsActivity";
     private String PREFERENCE;
     private SharedPreferences preferences;
     private EditText nameEditText;
     private EditText detailsEditText;
-    private TextView timeTextView;
-    private Button addBtn;
+    private Button addTimeBtn;
     private Button saveBtn;
-    private ListView timeListView;
-    private ArrayList<String> timeList = new ArrayList<String>();
-    private ArrayList<Integer> timeListInMinute = new ArrayList<>();
-    private ArrayAdapter listAdapter;
+    private RecyclerView listView;
+    private RecyclerView.Adapter listAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<String> timeList;
+    private ArrayList<Integer> timeListInMinute;
     private int timeHour;
     private int timeMinute;
-    private String timeStr = "Select Time";
     private AlarmManager alarmManager;
     private int position;
 
@@ -55,7 +56,7 @@ public class ReminderDetailsActivity extends AppCompatActivity {
         initialize();
         loadData();
 
-        timeTextView.setOnClickListener(new View.OnClickListener() {
+        addTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
@@ -65,41 +66,15 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                 TimePickerDialog timePicker = new TimePickerDialog(ReminderDetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        timeHour = hourOfDay;
-                        timeMinute = minute;
-                        timeTextView.setText(getTimeInAmPmFormat(timeHour * 60 + timeMinute));
+                        int timeInMinute = hourOfDay * 60 + minute;
+                        timeListInMinute.add(timeInMinute);
+                        timeList.add(getTimeInAmPmFormat(timeInMinute));
+                        listAdapter.notifyDataSetChanged();
                     }
                 }, currentHour, currentMinute, false);
-
                 timePicker.show();
             }
         });
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!timeTextView.getText().toString().equals("Select Time")) {
-                    int timeInMinute = timeHour * 60 + timeMinute;
-                    timeListInMinute.add(timeInMinute);
-                    timeList.add(getTimeInAmPmFormat(timeInMinute));
-                    listAdapter.notifyDataSetChanged();
-                    timeTextView.setText("Select Time");
-                }
-
-            }
-        });
-
-        timeListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                timeList.remove(position);
-                listAdapter.notifyDataSetChanged();
-                timeListInMinute.remove(position);
-                return true;
-            }
-        });
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,15 +138,10 @@ public class ReminderDetailsActivity extends AppCompatActivity {
                     editor.putBoolean(id + "Status", true);
                     editor.apply();
                     Toast.makeText(ReminderDetailsActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-
-
                 }
-
             }
         });
-
     }
-
     public String getTimeInAmPmFormat(int timeInMinute) {
         int hour = timeInMinute / 60;
         int minute = timeInMinute % 60;
@@ -183,7 +153,6 @@ public class ReminderDetailsActivity extends AppCompatActivity {
         else if (hour == 12) return 12 + ":" + sMinute + " PM";
         else return hour - 12 + ":" + sMinute + " PM";
     }
-
     public void loadData() {
         if (position == preferences.getInt("ListSize", 0)) {
             return;
@@ -201,7 +170,6 @@ public class ReminderDetailsActivity extends AppCompatActivity {
             listAdapter.notifyDataSetChanged();
         }
     }
-
     public void initialize() {
         PREFERENCE = getIntent().getStringExtra("PreferenceId");
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
@@ -209,17 +177,33 @@ public class ReminderDetailsActivity extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         nameEditText = findViewById(R.id.nameId);
         detailsEditText = findViewById(R.id.detailsId);
-        timeTextView = findViewById(R.id.timeTextID);
-        addBtn = findViewById(R.id.addTimeButtonID);
-        timeListView = findViewById(R.id.listViewID);
-        saveBtn = findViewById(R.id.saveButtonID);
-        listAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, timeList);
-        timeListView.setAdapter(listAdapter);
+        addTimeBtn = findViewById(R.id.addTimeButtonId);
+        saveBtn = findViewById(R.id.saveButtonId);
+        timeList = new ArrayList<>();
+        timeListInMinute = new ArrayList<>();
+        listView = findViewById(R.id.timeListId);
+        listView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        listView.setLayoutManager(layoutManager);
+        listAdapter = new TimeListAdapter(timeList, this);
+        listView.setAdapter(listAdapter);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(int position) {
+        timeList.remove(position);
+        timeListInMinute.remove(position);
+        listAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onChecked(int position, Boolean status) {
+
     }
 }

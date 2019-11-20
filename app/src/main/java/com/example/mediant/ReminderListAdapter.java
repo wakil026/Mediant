@@ -46,14 +46,6 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
                 }
             });
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    itemClickListener.onLongClick(getAdapterPosition());
-                    return true;
-                }
-            });
-
         }
 
     }
