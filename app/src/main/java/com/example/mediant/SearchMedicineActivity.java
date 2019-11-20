@@ -23,6 +23,7 @@ public class SearchMedicineActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_medicine);
+        getSupportActionBar().setTitle("Find Medicines");
 
         spinner = findViewById(R.id.spinner_seach_medicine);
         searchMedicine = findViewById(R.id.id_search_medicine);
@@ -49,6 +50,7 @@ public class SearchMedicineActivity extends AppCompatActivity implements Adapter
                     return false;
                 }
             });
+
 
         }
 
@@ -98,4 +100,6 @@ public class SearchMedicineActivity extends AppCompatActivity implements Adapter
         i.putExtras(bundle);
         startActivity(i);
     }
+
+
 }

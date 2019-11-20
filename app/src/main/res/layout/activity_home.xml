@@ -47,7 +47,7 @@
             android:layout_height="120dp"
             android:textColor="#FFF"
             android:layout_margin="5dp"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="My Medicine"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />

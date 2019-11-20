@@ -30,7 +30,6 @@
         <activity android:name=".SearchAmbulanceActivity" />
         <activity android:name=".SearchMedicineActivity" />
         <activity android:name=".AddMedicineActivity" />
-        <activity android:name=".MyMedicineActivity" />
         <activity android:name=".HomeAdminActivity" />
         <activity android:name=".AllMedicineActivity" />
         <activity android:name=".AllAmbulanceActivity" />
