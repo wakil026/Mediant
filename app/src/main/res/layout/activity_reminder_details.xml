@@ -31,39 +31,28 @@
         android:textSize="15dp"
         android:hint="Details"/>
 
-    <TextView
-        android:id="@+id/timeTextID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/detailsId"
-        android:layout_marginTop="20dp"
-        android:text="Select Time"
-        android:textSize="30sp" />
-
     <Button
-        android:id="@+id/addTimeButtonID"
+        android:id="@+id/addTimeButtonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/timeTextID"
+        android:layout_below="@id/detailsId"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Add"/>
+        android:text="Select Time" />
 
-    <ListView
-        android:id="@+id/listViewID"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/timeListId"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@id/addTimeButtonID"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/addTimeButtonId"
         android:layout_marginTop="10dp"
-        android:outlineAmbientShadowColor="@color/colorPrimaryDark"/>
+        android:background="#f2f4f2"/>
 
     <Button
-        android:id="@+id/saveButtonID"
+        android:id="@+id/saveButtonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/listViewID"
+        android:layout_below="@id/timeListId"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:text="Save" />
