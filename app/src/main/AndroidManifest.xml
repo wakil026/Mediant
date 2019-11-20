@@ -27,7 +27,8 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".RemoveAdminActivity" />
         <activity android:name=".AddAdminActivity" />
-        <activity android:name=".SearchAmbulanceActivity" />
+        <activity android:name=".SearchAmbulanceActivity"
+            />
         <activity android:name=".SearchMedicineActivity" />
         <activity android:name=".AddMedicineActivity" />
         <activity android:name=".HomeAdminActivity" />

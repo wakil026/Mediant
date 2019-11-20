@@ -11,11 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp"
-        android:background="?android:selectableItemBackground">
+        android:background="#ababab">
 
         <ImageView
             android:id="@+id/reminderImageId"
             android:layout_width="50dp"
+            android:background="#ababab"
             android:layout_height="50dp"
             android:src="@mipmap/ic_launcher"/>
 
@@ -23,11 +24,11 @@
             android:id="@+id/reminderNameId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#ababab"
             android:text="Line1"
             android:textSize="20sp"
             android:ellipsize="end"
             android:textColor="@color/black"
-            android:background="#FFF"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/switch1Id"
             android:layout_toEndOf="@+id/reminderImageId"
@@ -40,7 +41,7 @@
             android:ellipsize="end"
             android:text="Line2"
             android:textColor="@color/black"
-            android:background="#FFF"
+            android:background="#ababab"
             android:textSize="15sp"
             android:layout_below="@+id/reminderNameId"
             android:layout_toEndOf="@+id/reminderImageId"

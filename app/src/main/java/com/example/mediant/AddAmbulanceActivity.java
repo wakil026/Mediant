@@ -22,7 +22,9 @@ import java.util.Map;
 public class AddAmbulanceActivity extends AppCompatActivity {
 
     Button enterAmbulanceinfo;
-    EditText ambulanceName, contactNumber, city;
+    EditText ambulanceName;
+    EditText contactNumber;
+    EditText city;
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     private String key_ambulance_name = "Name";
