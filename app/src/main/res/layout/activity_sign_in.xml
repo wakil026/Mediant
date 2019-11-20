@@ -13,11 +13,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         app:srcCompat="@drawable/logo4" />
 
     <EditText
-        android:layout_marginTop="20dp"
         android:id="@+id/signInEmailId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
