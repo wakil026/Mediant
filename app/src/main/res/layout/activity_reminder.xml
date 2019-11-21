@@ -10,7 +10,9 @@
         android:id="@+id/remindersRecyclerId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:clipToPadding="false"
+        android:paddingBottom="500dp"
+        android:scrollbars="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addReminderId"

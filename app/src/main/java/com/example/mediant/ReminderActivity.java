@@ -227,6 +227,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(id + "Status", status);
         editor.apply();
+        uploadSettings();
     }
 
 
