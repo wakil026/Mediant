@@ -34,7 +34,12 @@ public class RemoveAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = removeAdminEmail.getText().toString().trim();
-                removeAdmin(email);
+                if(!email.isEmpty())
+                    removeAdmin(email);
+                else{
+                    removeAdminEmail.setError("Email cannot be empty");
+                    removeAdminEmail.requestFocus();
+                }
             }
         });
 

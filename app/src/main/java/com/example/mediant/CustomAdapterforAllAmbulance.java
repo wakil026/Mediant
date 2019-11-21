@@ -41,7 +41,7 @@ public class CustomAdapterforAllAmbulance extends RecyclerView.Adapter<ViewHolde
 
             @Override
             public void onItemLongClick(View view, final int position) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(listActivity);
+                AlertDialog.Builder builder = new AlertDialog.Builder(listActivity,R.style.AlertDialogStyle);
                 builder.setTitle("Warning");
                 builder.setMessage("Are you sure to call this ambulance?");
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

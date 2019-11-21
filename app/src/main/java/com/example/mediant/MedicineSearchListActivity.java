@@ -116,6 +116,7 @@ public class MedicineSearchListActivity extends AppCompatActivity {
                     });
         }
     }
+
     public void showDetails(final int position){
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection("Medicine Information").document(modelList.get(position).getBrandName())

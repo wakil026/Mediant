@@ -8,13 +8,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_button3"
+        android:padding="10dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/ambulanceName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:textSize="30sp"
             android:text="Name"
             />
@@ -22,10 +23,12 @@
             android:id="@+id/ambulanceNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:textSize="25sp"
             android:text="Contact Number"
             />
         <TextView
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ambulanceArea"

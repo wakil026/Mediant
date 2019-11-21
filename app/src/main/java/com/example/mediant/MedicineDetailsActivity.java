@@ -26,7 +26,7 @@ public class MedicineDetailsActivity extends AppCompatActivity {
         indications = findViewById(R.id.medicineIndications);
         sideEffect = findViewById(R.id.medicineSideEffects);
         genericName.setText(bundle.getString("genericName"));
-        companyName.setText(bundle.getString("companyName"));
+        companyName.setText(bundle.getString(""));
         contains.setText(bundle.getString("medicineContain"));
         medicineType.setText(bundle.getString("type"));
         brandName.setText(bundle.getString("brandName"));

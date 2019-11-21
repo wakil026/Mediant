@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -14,15 +16,17 @@ import android.widget.Toast;
 
 public class SearchMedicineActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    SearchView searchMedicine;
+    EditText searchMedicine;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
+    Button searchMedicineButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_medicine);
+        getSupportActionBar().setTitle("Find Medicines");
 
         spinner = findViewById(R.id.spinner_seach_medicine);
         searchMedicine = findViewById(R.id.id_search_medicine);
@@ -30,40 +34,43 @@ public class SearchMedicineActivity extends AppCompatActivity implements Adapter
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener( this);
+        searchMedicineButton = findViewById(R.id.search_medicine_button);
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String item = adapterView.getItemAtPosition(i).toString();
         if(item.equals("Brand Name")){
-            searchMedicine.setQueryHint("Enter brand name");
-            searchMedicine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            searchMedicine.setHint("Enter brand name");
+            searchMedicineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onQueryTextSubmit(String s) {
-                    searchaccordingBrandName(s);
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
+                public void onClick(View view) {
+                    String s = searchMedicine.getText().toString();
+                    if(s.isEmpty()){
+                        searchMedicine.setError("This field cannot be empty");
+                        searchMedicine.requestFocus();
+                        return;
+                    }
+                    else searchaccordingBrandName(s);
                 }
             });
+
 
         }
 
         else if(item.equals("Generic Name")){
-            searchMedicine.setQueryHint("Enter generic name");
-            searchMedicine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            searchMedicine.setHint("Enter generic name");
+            searchMedicineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onQueryTextSubmit(String s) {
-                    searchaccordingGenericName(s);
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
+                public void onClick(View view) {
+                    String s = searchMedicine.getText().toString();
+                    if(s.isEmpty()){
+                        searchMedicine.setError("This field cannot be empty");
+                        searchMedicine.requestFocus();
+                        return;
+                    }
+                    else searchaccordingGenericName(s);
                 }
             });
         }
@@ -98,4 +105,6 @@ public class SearchMedicineActivity extends AppCompatActivity implements Adapter
         i.putExtras(bundle);
         startActivity(i);
     }
+
+
 }

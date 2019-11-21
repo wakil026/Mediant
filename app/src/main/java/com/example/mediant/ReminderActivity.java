@@ -78,6 +78,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        getSupportActionBar().setTitle("My Medicines");
 
         createNotificationChannel();
         initialize();
@@ -112,8 +113,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
                 final int pos = viewHolder.getAdapterPosition();
-                new AlertDialog.Builder(ReminderActivity.this, R.style.AlertDialogStyle)
-                        .setTitle("Warning!")
+                new AlertDialog.Builder(ReminderActivity.this,R.style.AlertDialogStyle)
+                        .setTitle("Warning")
                         .setMessage("Delete this item?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override

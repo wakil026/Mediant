@@ -6,15 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".SearchAmbulanceActivity">
     <RelativeLayout
-        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <SearchView
+    <EditText
         android:id="@+id/id_search_ambu"
-        android:layout_width="wrap_content"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_searchambu" />
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/textView_searchambu"
+        />
 
     <TextView
         android:id="@+id/textView_searchambu"
@@ -28,6 +30,17 @@
         android:layout_marginLeft="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:popupBackground="#111"
+        android:background="@drawable/spinner_bg"
         android:layout_toEndOf="@+id/textView_searchambu"/>
+
+    <Button
+        android:id="@+id/search_ambu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/id_search_ambu"
+        android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 </ScrollView>
