@@ -107,6 +107,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 editor.putInt(pos2 + "Id", id1);
                 editor.apply();
                 adapter.notifyItemMoved(pos1, pos2);
+                db.collection("UserReminders").document(PREFERENCE).update(pos1 + "Id", id2);
+                db.collection("UserReminders").document(PREFERENCE).update(pos2 + "Id", id1);
                 return false;
             }
 
@@ -155,8 +157,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             refreshList();
         }
     }
-
-
+    
     public void remove(int position) {
         reminderList.remove(position);
         adapter.notifyItemRemoved(position);
@@ -227,7 +228,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(id + "Status", status);
         editor.apply();
-        uploadSettings();
+        db.collection("UserReminders").document(PREFERENCE).update(id + "Status", status);
     }
 
 
@@ -381,6 +382,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 int time = preferences.getInt(id + "Time" + j, 0);
                 int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
                 Intent intent1 = new Intent(ReminderActivity.this, AlertReceiver.class);
+                intent1.putExtra("Position", i);
                 intent1.putExtra("NotificationId", requestCode);
                 intent1.putExtra("Title", name);
                 intent1.putExtra("Message", description);
@@ -427,8 +429,6 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL, "whatever", NotificationManager.IMPORTANCE_HIGH);
             channel.enableVibration(true);
-            Uri uri = Uri.parse((ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.reminder));
-            channel.setSound(uri, null);
             channel.enableLights(true);
             channel.setLightColor(R.color.colorPrimary);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);

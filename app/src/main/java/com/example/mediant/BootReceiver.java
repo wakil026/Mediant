@@ -40,6 +40,7 @@ public class BootReceiver extends BroadcastReceiver {
                     int time = preferences.getInt(id + "Time" + j, 0);
                     int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
                     Intent intent1 = new Intent(context, AlertReceiver.class);
+                    intent1.putExtra("Position", i);
                     intent1.putExtra("NotificationId", requestCode);
                     intent1.putExtra("Title", name);
                     intent1.putExtra("Message", description);
