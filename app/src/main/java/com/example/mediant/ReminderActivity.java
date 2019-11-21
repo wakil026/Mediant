@@ -69,6 +69,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        getSupportActionBar().setTitle("My Medicines");
 
         createNotificationChannel();
         initialize();

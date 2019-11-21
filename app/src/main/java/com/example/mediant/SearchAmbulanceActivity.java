@@ -10,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,7 +20,8 @@ import android.widget.Toast;
 public class SearchAmbulanceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
-    SearchView ambusearch;
+    EditText ambusearch;
+    Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,33 +35,9 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        searchButton = findViewById(R.id.search_ambu_button);
 
 
-
-
-        ambusearch.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        ambusearch.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                //do what you want  searchview is not expanded
-                return false;
-            }
-        });
-
-
-    }
-
-    @Override
-    public boolean onKeyDown (int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            ambusearch.onActionViewCollapsed();
-        }
-        return super.onKeyDown (keyCode, event);
     }
 
 
@@ -67,33 +46,34 @@ public class SearchAmbulanceActivity extends AppCompatActivity implements Adapte
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String item = adapterView.getItemAtPosition(i).toString();
         if(item.equals("City")){
-            ambusearch.setQueryHint("Enter city");
-            ambusearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            ambusearch.setHint("Enter city");
+            searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onQueryTextSubmit(String s) {
-                    searchaccordingcity(s);
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
+                public void onClick(View view) {
+                    String s = ambusearch.getText().toString();
+                    if(s.isEmpty()){
+                        ambusearch.setError("This field cannot be empty");
+                        ambusearch.requestFocus();
+                        return;
+                    }
+                    else searchaccordingcity(s);
                 }
             });
+
         }
 
         else if(item.equals("Name")){
-            ambusearch.setQueryHint("Enter ambulance name");
-            ambusearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            ambusearch.setHint("Enter ambulance name");
+            searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onQueryTextSubmit(String s) {
-                    searchaccordingname(s);
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
+                public void onClick(View view) {
+                    String s = ambusearch.getText().toString();
+                    if(s.isEmpty()){
+                        ambusearch.setError("This field cannot be empty");
+                        ambusearch.requestFocus();
+                        return;
+                    }
+                    else searchaccordingname(s);
                 }
             });
         }
