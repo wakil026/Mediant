@@ -35,7 +35,12 @@ public class AddAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = newAdminEmail.getText().toString().trim();
-                addAdmin(email);
+                if(!email.isEmpty())
+                    addAdmin(email);
+                else{
+                    newAdminEmail.setError("Email cannot be empty");
+                    newAdminEmail.requestFocus();
+                }
             }
         });
 
