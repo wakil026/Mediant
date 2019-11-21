@@ -199,6 +199,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 int time = preferences.getInt(id + "Time" + i, -1);
                 int requestCode = preferences.getInt(id + "RequestCode" + i, -1);
                 Intent intent = new Intent(this, AlertReceiver.class);
+                intent.putExtra("PreferenceId", PREFERENCE);
                 intent.putExtra("NotificationId", requestCode);
                 intent.putExtra("Title", name);
                 intent.putExtra("Message", details);
@@ -293,6 +294,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                                     int requestCode = ((Long) mp.get(id + "RequestCode" + j)).intValue();
                                     editor.putInt(id + "RequestCode" + j, requestCode);
                                     Intent intent = new Intent(ReminderActivity.this, AlertReceiver.class);
+                                    intent.putExtra("PreferenceId", PREFERENCE);
+                                    intent.putExtra("Position", i);
                                     intent.putExtra("NotificationId", requestCode);
                                     intent.putExtra("Title", name);
                                     intent.putExtra("Message", details);
@@ -382,6 +385,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 int time = preferences.getInt(id + "Time" + j, 0);
                 int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
                 Intent intent1 = new Intent(ReminderActivity.this, AlertReceiver.class);
+                intent1.putExtra("PreferenceId", i);
                 intent1.putExtra("Position", i);
                 intent1.putExtra("NotificationId", requestCode);
                 intent1.putExtra("Title", name);
@@ -428,6 +432,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
     public void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL, "whatever", NotificationManager.IMPORTANCE_HIGH);
+            channel.setSound(null, null);
             channel.enableVibration(true);
             channel.enableLights(true);
             channel.setLightColor(R.color.colorPrimary);

@@ -17,7 +17,7 @@ import java.util.Calendar;
 public class BootReceiver extends BroadcastReceiver {
 
     private String CURRENTUSER = "MediantUserId";
-
+    private String CHANNEL = "Mediant";
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals("android.intent.action.QUICKBOOT_POWERON"))  {
@@ -40,6 +40,7 @@ public class BootReceiver extends BroadcastReceiver {
                     int time = preferences.getInt(id + "Time" + j, 0);
                     int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
                     Intent intent1 = new Intent(context, AlertReceiver.class);
+                    intent1.putExtra("PreferenceId", uid);
                     intent1.putExtra("Position", i);
                     intent1.putExtra("NotificationId", requestCode);
                     intent1.putExtra("Title", name);
@@ -66,7 +67,8 @@ public class BootReceiver extends BroadcastReceiver {
     public void createNotificationChannel(Context context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("Mediant", "whatever", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(CHANNEL, "whatever", NotificationManager.IMPORTANCE_HIGH);
+            channel.setSound(null, null);
             channel.enableVibration(true);
             channel.enableLights(true);
             channel.setLightColor(R.color.colorPrimary);
