@@ -48,8 +48,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private String city;
 
     private String KEY_NAME = "Name";
-    private String KEY_BLOOD_GROUP = "Blood Group:";
-    private String KEY_AGE = "Age:";
+    private String KEY_BLOOD_GROUP = "Blood Group";
+    private String KEY_AGE = "Age";
     private String KEY_CITY = "City";
 
     @Override

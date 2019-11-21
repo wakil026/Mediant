@@ -148,6 +148,8 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.about_us:
                 // do your code
+                intent = new Intent(this,AboutUsActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.profileId:
                 intent = new Intent(this,ViewProfileActivity.class);
