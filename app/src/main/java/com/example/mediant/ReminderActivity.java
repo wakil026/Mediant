@@ -369,6 +369,32 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             reminderList.add(new ReminderItem(name, description, status));
         }
         adapter.notifyDataSetChanged();
+
+        for (int i = 0; i < size; ++i) {
+            int id = preferences.getInt(i + "Id", -1);
+            String name = preferences.getString(id + "Name", "");
+            String description = preferences.getString(id + "Details", "");
+            int times = preferences.getInt(id + "Times", 0);
+            for (int j = 0; j < times; ++j) {
+                int time = preferences.getInt(id + "Time" + j, 0);
+                int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
+                Intent intent1 = new Intent(ReminderActivity.this, AlertReceiver.class);
+                intent1.putExtra("NotificationId", requestCode);
+                intent1.putExtra("Title", name);
+                intent1.putExtra("Message", description);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.HOUR_OF_DAY, time / 60);
+                c.set(Calendar.MINUTE, time % 60);
+                c.set(Calendar.SECOND, 0);
+                if (c.before(Calendar.getInstance())) {
+                    c.add(Calendar.DATE, 1);
+                }
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            }
+
+        }
     }
 
     public void removeAll() {

@@ -176,28 +176,19 @@ public class HomeActivity extends AppCompatActivity {
         String uid = getSharedPreferences(CURRENTUSER, MODE_PRIVATE).getString("Uid", "");
         if (uid == "") return;
         SharedPreferences preferences = getSharedPreferences(uid, MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         int size = preferences.getInt("ListSize", 0);
         for (int i = 0; i < size; ++i) {
             int id = preferences.getInt(i + "Id", -1);
-            editor.remove(id + "Id");
-            editor.remove(id + "Name");
-            editor.remove(id + "Details");
-            editor.remove(id + "Status");
             int oldtimes = preferences.getInt(id + "Times", 0);
-            editor.remove(id + "Times");
             for (int j = 0; j < oldtimes; ++j) {
                 int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
                 Intent intent = new Intent(HomeActivity.this, AlertReceiver.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.cancel(pendingIntent);
                 pendingIntent.cancel();
-                editor.remove(id + "RequestCode" + i);
-                editor.remove(id + "Time" + i);
             }
         }
-        editor.apply();
     }
 
 }
