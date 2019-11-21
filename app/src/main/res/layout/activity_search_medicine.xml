@@ -29,6 +29,8 @@
         android:id="@+id/spinner_seach_medicine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:popupBackground="#111"
+        android:background="@drawable/spinner_bg"
         android:layout_toEndOf="@+id/textView_search_medicine"/>
 
         <Button
