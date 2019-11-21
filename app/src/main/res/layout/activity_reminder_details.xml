@@ -38,7 +38,7 @@
         android:layout_below="@id/detailsId"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Select Time" />
+        android:text="Add Time" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/timeListId"

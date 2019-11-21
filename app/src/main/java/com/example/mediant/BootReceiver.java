@@ -15,6 +15,9 @@ import android.util.Log;
 import java.util.Calendar;
 
 public class BootReceiver extends BroadcastReceiver {
+
+    private String CURRENTUSER = "MediantUserId";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals("android.intent.action.QUICKBOOT_POWERON"))  {
@@ -22,11 +25,14 @@ public class BootReceiver extends BroadcastReceiver {
             // Set the alarm here when device boots
 
             createNotificationChannel(context);
-
-            SharedPreferences preferences = context.getSharedPreferences("MyPreference", Context.MODE_PRIVATE);
+            String uid = context.getSharedPreferences(CURRENTUSER, Context.MODE_PRIVATE).getString("Uid", "");
+            if (uid == "") return;
+            SharedPreferences preferences = context.getSharedPreferences(uid, Context.MODE_PRIVATE);
             int size = preferences.getInt("ListSize", 0);
             for (int i = 0; i < size; ++i) {
                 int id = preferences.getInt(i + "Id", -1);
+                Boolean status = preferences.getBoolean(id + "Status", false);
+                if (!status) continue;
                 String name = preferences.getString(id + "Name", "");
                 String description = preferences.getString(id + "Details", "");
                 int times = preferences.getInt(id + "Times", 0);

@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +26,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private String CURRENTUSER = "MediantUserId";
 
     Button allmedicine,searchMedicine;
     Button mymedicine;
@@ -155,12 +160,34 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             case R.id.sign_out:
                FirebaseAuth.getInstance().signOut();
+               // unsetting reminders
+                removeReminders();
+
                finish();
                intent = new Intent(getApplicationContext(),SignInActivity.class);
                startActivity(intent);
                return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void removeReminders() {
+        String uid = getSharedPreferences(CURRENTUSER, MODE_PRIVATE).getString("Uid", "");
+        if (uid == "") return;
+        SharedPreferences preferences = getSharedPreferences(uid, MODE_PRIVATE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        int size = preferences.getInt("ListSize", 0);
+        for (int i = 0; i < size; ++i) {
+            int id = preferences.getInt(i + "Id", -1);
+            int oldtimes = preferences.getInt(id + "Times", 0);
+            for (int j = 0; j < oldtimes; ++j) {
+                int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
+                Intent intent = new Intent(HomeActivity.this, AlertReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmManager.cancel(pendingIntent);
+                pendingIntent.cancel();
+            }
         }
     }
 
