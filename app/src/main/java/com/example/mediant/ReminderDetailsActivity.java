@@ -154,7 +154,7 @@ public class ReminderDetailsActivity extends AppCompatActivity implements ItemCl
             }
             editor.putBoolean(id + "Status", true);
             editor.apply();
-            Toast.makeText(this, "Saved in Local", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
             t1 = System.currentTimeMillis();
             preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
             Map<String, ?> mp = preferences.getAll();
@@ -162,14 +162,13 @@ public class ReminderDetailsActivity extends AppCompatActivity implements ItemCl
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            t2 = System.currentTimeMillis();
-                            Toast.makeText(ReminderDetailsActivity.this, "Saved Online " + (double) (t2 - t1) / 1000 + "sec", Toast.LENGTH_SHORT).show();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ReminderDetailsActivity.this, "Failed To Save Online", Toast.LENGTH_SHORT).show();
+
                         }
                     });
         }

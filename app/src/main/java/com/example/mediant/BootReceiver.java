@@ -31,6 +31,8 @@ public class BootReceiver extends BroadcastReceiver {
             int size = preferences.getInt("ListSize", 0);
             for (int i = 0; i < size; ++i) {
                 int id = preferences.getInt(i + "Id", -1);
+                Boolean status = preferences.getBoolean(id + "Status", false);
+                if (!status) continue;
                 String name = preferences.getString(id + "Name", "");
                 String description = preferences.getString(id + "Details", "");
                 int times = preferences.getInt(id + "Times", 0);

@@ -183,7 +183,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         editor.remove(listSize - 1 + "Id");
         editor.putInt("ListSize", listSize - 1);
         editor.apply();
-        Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
         uploadSettings();
     }
 
@@ -308,8 +308,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                             }
                             editor.apply();
                             refreshList();
-                            t2 = System.currentTimeMillis();
-                            Toast.makeText(ReminderActivity.this, "Data Imported in " + (double) (t2 - t1) / 1000 + " sec", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReminderActivity.this, "Data Imported", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -332,8 +331,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        t2 = System.currentTimeMillis();
-                        Toast.makeText(ReminderActivity.this, "Updated Online in " + (double) (t2 - t1) / 1000 + "sec", Toast.LENGTH_SHORT).show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -374,6 +372,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
         for (int i = 0; i < size; ++i) {
             int id = preferences.getInt(i + "Id", -1);
+            Boolean status = preferences.getBoolean(id + "Status", false);
+            if (!status) continue;
             String name = preferences.getString(id + "Name", "");
             String description = preferences.getString(id + "Details", "");
             int times = preferences.getInt(id + "Times", 0);
