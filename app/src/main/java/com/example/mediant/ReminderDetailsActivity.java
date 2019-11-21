@@ -139,7 +139,6 @@ public class ReminderDetailsActivity extends AppCompatActivity implements ItemCl
                 intent.putExtra("NotificationId", requestCode);
                 intent.putExtra("Title", name);
                 intent.putExtra("Message", details);
-                intent.putExtra("PreferenceId", PREFERENCE);
                 intent.putExtra("Position", position);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderDetailsActivity.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 Calendar c = Calendar.getInstance();
