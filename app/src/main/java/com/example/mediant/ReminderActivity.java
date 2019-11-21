@@ -5,11 +5,17 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.service.media.CameraPrewarmService;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +28,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +62,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
     private static final String TAG = "ReminderActivity";
     private static final String CHANNEL = "Mediant";
+    private String CURRENTUSER = "MediantUserId";
     private String PREFERENCE;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
@@ -98,6 +107,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 editor.putInt(pos2 + "Id", id1);
                 editor.apply();
                 adapter.notifyItemMoved(pos1, pos2);
+                db.collection("UserReminders").document(PREFERENCE).update(pos1 + "Id", id2);
+                db.collection("UserReminders").document(PREFERENCE).update(pos2 + "Id", id1);
                 return false;
             }
 
@@ -116,6 +127,14 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //Log.d(TAG, "onClick: dhukse");
+                                adapter.notifyItemChanged(pos);
+                            }
+                        })
+                        .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                //Log.d(TAG, "onCancel: dhukse");
                                 adapter.notifyItemChanged(pos);
                             }
                         }).show();
@@ -138,8 +157,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             refreshList();
         }
     }
-
-
+    
     public void remove(int position) {
         reminderList.remove(position);
         adapter.notifyItemRemoved(position);
@@ -166,7 +184,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         editor.remove(listSize - 1 + "Id");
         editor.putInt("ListSize", listSize - 1);
         editor.apply();
-        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
+        uploadSettings();
     }
 
     @Override
@@ -209,6 +228,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(id + "Status", status);
         editor.apply();
+        db.collection("UserReminders").document(PREFERENCE).update(id + "Status", status);
     }
 
 
@@ -221,11 +241,23 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.syncId:
+            case R.id.importId:
 
-                return true;
-            case R.id.deleteId:
+                new AlertDialog.Builder(ReminderActivity.this, R.style.AlertDialogStyle)
+                        .setTitle("Warning!")
+                        .setMessage("Import Settings From Online?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                importSettings();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        }).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -234,8 +266,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
     public void importSettings() {
         t1 = System.currentTimeMillis();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("UserReminders").document(uid).get()
+        db.collection("UserReminders").document(PREFERENCE).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -278,7 +309,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                             }
                             editor.apply();
                             refreshList();
-                            Toast.makeText(ReminderActivity.this, "Data Imported!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ReminderActivity.this, "Data Imported", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -295,14 +326,13 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
     public void uploadSettings() {
         t1 = System.currentTimeMillis();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
         Map<String, ?> mp = preferences.getAll();
-        db.collection("UserReminders").document(uid).set(mp)
+        db.collection("UserReminders").document(PREFERENCE).set(mp)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        showTime();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -313,13 +343,10 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 });
     }
 
-    public void showTime() {
-        t2 = System.currentTimeMillis();
-        Toast.makeText(this, "Success! " + (double) (t2 - t1) / 1000 + " sec", Toast.LENGTH_SHORT).show();
-    }
-
     public void initialize() {
         PREFERENCE = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (PREFERENCE == null) finish();
+        getSharedPreferences(CURRENTUSER, MODE_PRIVATE).edit().putString("Uid", PREFERENCE).apply();
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
         reminderList = new ArrayList<>();
@@ -343,6 +370,35 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             reminderList.add(new ReminderItem(name, description, status));
         }
         adapter.notifyDataSetChanged();
+
+        for (int i = 0; i < size; ++i) {
+            int id = preferences.getInt(i + "Id", -1);
+            Boolean status = preferences.getBoolean(id + "Status", false);
+            if (!status) continue;
+            String name = preferences.getString(id + "Name", "");
+            String description = preferences.getString(id + "Details", "");
+            int times = preferences.getInt(id + "Times", 0);
+            for (int j = 0; j < times; ++j) {
+                int time = preferences.getInt(id + "Time" + j, 0);
+                int requestCode = preferences.getInt(id + "RequestCode" + j, 0);
+                Intent intent1 = new Intent(ReminderActivity.this, AlertReceiver.class);
+                intent1.putExtra("Position", i);
+                intent1.putExtra("NotificationId", requestCode);
+                intent1.putExtra("Title", name);
+                intent1.putExtra("Message", description);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.HOUR_OF_DAY, time / 60);
+                c.set(Calendar.MINUTE, time % 60);
+                c.set(Calendar.SECOND, 0);
+                if (c.before(Calendar.getInstance())) {
+                    c.add(Calendar.DATE, 1);
+                }
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            }
+
+        }
     }
 
     public void removeAll() {

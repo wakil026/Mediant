@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mediant">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateAmbulanceActivity"></activity>
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".UpdateAmbulanceActivity" />
         <activity android:name=".ReminderDetailsActivity" />
         <activity android:name=".ReminderActivity" />
         <activity android:name=".UpdateMedicineActivity" />
@@ -27,8 +31,7 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".RemoveAdminActivity" />
         <activity android:name=".AddAdminActivity" />
-        <activity android:name=".SearchAmbulanceActivity"
-            />
+        <activity android:name=".SearchAmbulanceActivity" />
         <activity android:name=".SearchMedicineActivity" />
         <activity android:name=".AddMedicineActivity" />
         <activity android:name=".HomeAdminActivity" />
@@ -49,12 +52,10 @@
         <receiver android:name=".AlertReceiver" />
         <receiver android:name=".BootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
     </application>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>
