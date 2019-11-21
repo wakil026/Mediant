@@ -16,7 +16,6 @@ public class AlertReceiver extends BroadcastReceiver {
 
     private static final String TAG = "AlertReceiver";
     private String CHANNEL = "Mediant";
-    private String CURRENTUSER = "MediantUserId";
     private String PREFERENCE;
     private int notificationId;
     private String message;
@@ -33,7 +32,7 @@ public class AlertReceiver extends BroadcastReceiver {
                 player.release();
             }
         });
-        PREFERENCE = context.getSharedPreferences(CURRENTUSER, Context.MODE_PRIVATE).getString("Uid", "");
+        PREFERENCE = intent.getStringExtra("PreferenceId");
         notificationId = intent.getIntExtra("NotificationId", 0);
         position = intent.getIntExtra("Position", 0);
         title = intent.getStringExtra("Title");
