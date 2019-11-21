@@ -5,11 +5,17 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.service.media.CameraPrewarmService;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +28,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +62,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
     private static final String TAG = "ReminderActivity";
     private static final String CHANNEL = "Mediant";
+    private String CURRENTUSER = "MediantUserId";
     private String PREFERENCE;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
@@ -103,8 +112,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
                 final int pos = viewHolder.getAdapterPosition();
-                new AlertDialog.Builder(ReminderActivity.this)
-                        .setTitle("Warning")
+                new AlertDialog.Builder(ReminderActivity.this, R.style.AlertDialogStyle)
+                        .setTitle("Warning!")
                         .setMessage("Delete this item?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -115,6 +124,14 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //Log.d(TAG, "onClick: dhukse");
+                                adapter.notifyItemChanged(pos);
+                            }
+                        })
+                        .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                //Log.d(TAG, "onCancel: dhukse");
                                 adapter.notifyItemChanged(pos);
                             }
                         }).show();
@@ -165,7 +182,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         editor.remove(listSize - 1 + "Id");
         editor.putInt("ListSize", listSize - 1);
         editor.apply();
-        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+        uploadSettings();
     }
 
     @Override
@@ -220,11 +238,23 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.syncId:
+            case R.id.importId:
 
-                return true;
-            case R.id.deleteId:
+                new AlertDialog.Builder(ReminderActivity.this, R.style.AlertDialogStyle)
+                        .setTitle("Warning!")
+                        .setMessage("Import Settings From Online?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                importSettings();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        }).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -233,8 +263,7 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
     public void importSettings() {
         t1 = System.currentTimeMillis();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("UserReminders").document(uid).get()
+        db.collection("UserReminders").document(PREFERENCE).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -277,7 +306,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                             }
                             editor.apply();
                             refreshList();
-                            Toast.makeText(ReminderActivity.this, "Data Imported!", Toast.LENGTH_SHORT).show();
+                            t2 = System.currentTimeMillis();
+                            Toast.makeText(ReminderActivity.this, "Data Imported in " + (double) (t2 - t1) / 1000 + " sec", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -294,14 +324,14 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
 
     public void uploadSettings() {
         t1 = System.currentTimeMillis();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
         Map<String, ?> mp = preferences.getAll();
-        db.collection("UserReminders").document(uid).set(mp)
+        db.collection("UserReminders").document(PREFERENCE).set(mp)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        showTime();
+                        t2 = System.currentTimeMillis();
+                        Toast.makeText(ReminderActivity.this, "Updated Online in " + (double) (t2 - t1) / 1000 + "sec", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -312,13 +342,10 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
                 });
     }
 
-    public void showTime() {
-        t2 = System.currentTimeMillis();
-        Toast.makeText(this, "Success! " + (double) (t2 - t1) / 1000 + " sec", Toast.LENGTH_SHORT).show();
-    }
-
     public void initialize() {
         PREFERENCE = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (PREFERENCE == null) finish();
+        getSharedPreferences(CURRENTUSER, MODE_PRIVATE).edit().putString("Uid", PREFERENCE).apply();
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
         reminderList = new ArrayList<>();
@@ -372,6 +399,8 @@ public class ReminderActivity extends AppCompatActivity implements ItemClickList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL, "whatever", NotificationManager.IMPORTANCE_HIGH);
             channel.enableVibration(true);
+            Uri uri = Uri.parse((ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.reminder));
+            channel.setSound(uri, null);
             channel.enableLights(true);
             channel.setLightColor(R.color.colorPrimary);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
