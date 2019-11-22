@@ -81,9 +81,7 @@ public class SignUpActivity extends AppCompatActivity  implements View.OnClickLi
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
-
         }
-
     }
 
     private void userRegister() {
